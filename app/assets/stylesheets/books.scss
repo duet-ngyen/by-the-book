@@ -1,4 +1,4 @@
-@media screen and (min-width: 769px) {
+@media screen and (min-width: 768px) {
   .navbar .navbar-nav {
     display: inline-block;
     float: none;
@@ -42,6 +42,15 @@
     display: none;
   }
 
+  .mobile-book {
+    visibility: hidden;
+    clear: both;
+    float: left;
+    margin: 10px auto 5px 20px;
+    width: 28%;
+    display: none;
+  }
+
 
 }
 
@@ -50,7 +59,7 @@
   .solugan {
     text-align: center;
     position: relative;
-    max-width: 400px;
+    max-width: 350px;
     top: 15px;
     width: auto;
     font-size: 2.5em;
@@ -94,10 +103,33 @@
   .body-content {
     width: 100%;
   }
+}
 
+//tablet
+@media screen and (max-width: 600px) {
+  .xs-book-img{
+    float: none;
+    margin-right: 0;
+  }
+  .xs-book-des {
+    visibility: hidden;
+    clear: both;
+    float: left;
+    margin: 10px auto 5px 20px;
+    width: 28%;
+    display: none;
+  }
 
+  .xs-book-img {
+    text-align: center;
+  }
+
+  .xs-book {
+    text-align: center;
+  }
 
 }
+
 
 .navbar-center {
   max-width: 980px;

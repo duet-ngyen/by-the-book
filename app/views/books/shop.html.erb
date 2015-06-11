@@ -36,17 +36,16 @@
 
                     <!--Book for mobile screen-->
                     <!--Disable in computer screen-->
-                    <%= link_to("book/#{book.id}", class:"xs-book-modal") do %>
-                        <div class="col-sm-3" style="margin-bottom: 10px;">
+                        <div class="col-sm-3 mobile-book" style="margin-bottom: 10px;">
                           <div class="xs-book-img" ><%= image_tag("#{book.imgbook}", class: "img-book img-thumbnail") %></div>
                           <div class="xs-book">
-                            <div class="" ><%= book.title %></div>
-                            <div class=""><%= "USD: " + book.price.to_s %></div>
+                            <%= link_to(book.title, {controller: "books", action: "show", :id => "#{book.id}"}, {class: "mobile-link-title"}) %>
+                            <div><%= "USD: " + book.price.to_s %></div>
                             <div class="xs-book-des"><%= book.description.split[0...50].join(' ') + "..." %></div>
-                          </div>
                           <div style="clear:both;"></div>
                         </div>
-                    <% end %>
+                          </div>
+
 
                     <!-- Modal -->
                     <div class="modal fade" id="myModal_<%= book.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
