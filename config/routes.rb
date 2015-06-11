@@ -9,6 +9,8 @@ Rails.application.routes.draw do
 
   post 'book/:id' => 'books#show'
 
+  get 'book/:id' => 'books#show'
+
   get 'author/:id' => 'books#show'
 
   get 'category/:id' => 'books#show'
