@@ -1,0 +1,106 @@
+<div class="body-background">
+  <div class="body-content">
+    <!--Cover Img-->
+    <div class="home-cover">
+      <div class="home-cover-img">
+        <%= image_tag("home-cover.jpg", alt: "home cover", class: "img-home img-rounded")%>
+      </div>
+    </div>
+    <fieldset>
+      <legend>Shop</legend>
+      <div class="shop">
+        <!--Show all category-->
+        <% Category.all.each do |category| %>
+          <div class="category">
+              <div class="category-title">
+                <%= category.category_title %>
+              </div>
+              <!--Show books for each category-->
+              <% books_category = category.books %>
+              <div style="width: 100%">
+                <% books_category.each do |book| %>
+
+                    <!--Book for computer screen-->
+                    <!--Disabled in mobile screen-->
+                    <%= link_to("#", class:"book-modal", data: {toggle: "modal", target: "#myModal_#{book.id}"}) do %>
+                      <div class="col-sm-3">
+                        <div class="xs-book-img" ><%= image_tag("#{book.imgbook}", class: "img-book img-thumbnail") %></div>
+                        <div class="xs-book">
+                          <div class="" ><%= book.title %></div>
+                          <div class=""><%= "USD: " + book.price.to_s %></div>
+                          <div class="xs-book-des"><%= book.description.split[0...50].join(' ') + "..." %></div>
+                        </div>
+                        <div style="clear:both;"></div>
+                      </div>
+                    <% end %>
+
+                    <!--Book for mobile screen-->
+                    <!--Disable in computer screen-->
+                    <%= link_to("book/#{book.id}", class:"xs-book-modal") do %>
+                        <div class="col-sm-3">
+                          <div class="xs-book-img" ><%= image_tag("#{book.imgbook}", class: "img-book img-thumbnail") %></div>
+                          <div class="xs-book">
+                            <div class="" ><%= book.title %></div>
+                            <div class=""><%= "USD: " + book.price.to_s %></div>
+                            <div class="xs-book-des"><%= book.description.split[0...50].join(' ') + "..." %></div>
+                          </div>
+                          <div style="clear:both;"></div>
+                        </div>
+                    <% end %>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="myModal_<%= book.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel"><%= book.title %></h4>
+                          </div>
+                          <div class="modal-body">
+                            <div class="modal-book-img" ><%= image_tag("#{book.imgbook}", class: "img-book img-thumbnail") %></div>
+                            <div class="modal-book">
+                              <!--List all author of a book-->
+                              <% authors_of_book = book.authors %>
+                              <div class="modal-author">
+                                <% authors_of_book.each do |author|%>
+                                  <%= link_to("#{author.name}", "author/#{author.id}") %>
+                                <% end %>
+                              </div>
+                              <!--Price-->
+                              <div class="modal-price"><%= "USD: " + book.price.to_s %></div>
+                              <!--List all category of book-->
+                              <% catetory_of_book = book.categories %>
+                              <div>
+                                <% catetory_of_book.each do |category| %>
+                                  <%= link_to("#{category.category_title}", "category/#{category.id}") %>
+                                <% end %>
+                              </div>
+
+
+                              <div class="modal-book-des"><%= book.description.split[0...50].join(' ') + "..." %></div>
+                            </div>
+                            <div style="clear:both;"></div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" style="float: right; margin-left: 20px" data-dismiss="modal">Close</button>
+                            <%= button_to "View details", {controller: "books", action: "show", :id => "#{book.id}"}, {class:"btn btn-primary"} %>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                <% end %>
+              </div>
+              <div style="clear: both"></div>
+            </div>
+
+        <% end %>
+      </div>
+    </fieldset>
+
+    test
+    <%= link_to(@album) do %>Google
+    <% end %>
+  </div>
+
+</div>
