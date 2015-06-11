@@ -1,13 +1,13 @@
 @media screen and (min-width: 769px) {
-  .navbar .navbar-nav {
-    display: inline-block;
-    float: none;
-    vertical-align: top;
-  }
-
-  .navbar .navbar-collapse {
-    text-align: center;
-  }
+//  .navbar .navbar-nav {
+//    display: inline-block;
+//    float: none;
+//    vertical-align: top;
+//  }
+//
+//  .navbar .navbar-collapse {
+//    text-align: center;
+//  }
 
 
   .solugan {
@@ -93,6 +93,14 @@
     margin: 10px auto 5px 20px;
     width: 28%;
     display: none;
+  }
+
+  .navbar .navbar-nav {
+
+  }
+
+  .navbar .navbar-collapse {
+
   }
 
 }
