@@ -9,6 +9,7 @@ author_list = [
     ["Connie Brockway","connie@outlook.com","authors/Connie_Brockway.jpg", 1954,"Connie Brockway (born December 16, 1954) is a best-selling American author of over twenty historical and contemporary romance novels since 1994." ],
     ["Donald Hodges","donald@hodges.com","",1965,"About Donald Hodges"],
     ["Ross Gandy","ross@gandy.com","",1966, "About Ross Gandy"],
+    ["Veronica Roth","veronica@roth.com",1988,"Veronica Roth is an American novelist and short story writer known for her debut New York Times bestselling Divergent trilogy, consisting of Divergent, Insurgent, and Allegiant; and Four: A Divergent "]
 ]
 
 author_list.each do |author_name, author_email, author_avatar, author_country, author_birth, author_about|
@@ -18,37 +19,56 @@ end
 
 
 # Books
-
 book_eloisa = [
     ["Four Nights with the Duke", "HarperCollins", 2015, "9780062223920", 7.99,
-     "books/Four_Nights_with_the_Duke.jpg", "Eloisa James returns with another fabulous romance in her New York Times bestselling Desperate Duchesses series!
-	As a young girl, Emilia Gwendolyn Carrington told the annoying future Duke of Pindar that she would marry any man in the world before him—so years later she is horrified to realize that she has nowhere else to turn.
-	Evander Septimus Brody has his own reasons for agreeing to Mia's audacious proposal, but there's one thing he won't give his inconvenient wife: himself.
-	Instead, he offers Mia a devil's bargain . . . he will spend four nights a year with her. Four nights, and nothing more. And those only when she begs for them.
-	Which Mia will never do.
+     "books/Four_Nights_with_the_Duke.jpg", "Eloisa James returns with another fabulous romance in her New York Times bestselling Desperate Duchesses series!<br/>
+	As a young girl, Emilia Gwendolyn Carrington told the annoying future Duke of Pindar that she would marry any man in the world before him—so years later she is horrified to realize that she has nowhere else to turn.<br/>
+	Evander Septimus Brody has his own reasons for agreeing to Mia's audacious proposal, but there's one thing he won't give his inconvenient wife: himself.<br/>
+	Instead, he offers Mia a devil's bargain . . . he will spend four nights a year with her. Four nights, and nothing more. And those only when she begs for them.<br/>
+	Which Mia will never do.<br/>
 	Now Vander faces the most crucial challenge of his life: he must seduce his own wife in order to win her heart—and no matter what it takes, this is the one battle he can't afford to lose." ],
     ["The Lady Most Likely...", "HarperCollins", 2010, "9780062037411", 8.99, "books/The_Lady_Most Likely.jpg",
-    "Three of the brightest stars ofhistorical romance invite you to a party at the countryhome of the Honorable Marquess of Finchley
-	Hugh Dunne, the Earl of Briarly, needs a wife, so his sisterhands him a list of delectable damsels and promises to invite them—and a few other gentlemen—to her country house for whatis sure to be the event of the season.
-	Hugh will have time to woo whichever lady he most desires . . .Unless someone else snatches her first.
-	The invitation list includes:
-	The horse-mad but irresistibly handsome Earl of Briarly
-	The always outspoken Miss Katherine Peyton
-	The dashing war hero Captain Neill Oakes
-	The impossibly beautiful (and painfully shy) Miss Gwendolyn Passmore
-	The terribly eligible new Earl of Charters
-	The widowed Lady Georgina Sorrell (who has no plans to marry, ever)
+    "Three of the brightest stars ofhistorical romance invite you to a party at the countryhome of the Honorable Marquess of Finchley<br/>
+	Hugh Dunne, the Earl of Briarly, needs a wife, so his sisterhands him a list of delectable damsels and promises to invite them—and a few other gentlemen—to her country house for whatis sure to be the event of the season.<br/>
+	Hugh will have time to woo whichever lady he most desires . . .Unless someone else snatches her first.<br/>
+	The invitation list includes:<br/>
+	The horse-mad but irresistibly handsome Earl of Briarly<br/>
+	The always outspoken Miss Katherine Peyton<br/>
+	The dashing war hero Captain Neill Oakes<br/>
+	The impossibly beautiful (and painfully shy) Miss Gwendolyn Passmore<br/>
+	The terribly eligible new Earl of Charters<br/>
+	The widowed Lady Georgina Sorrell (who has no plans to marry, ever)<br/>
 	And your hostess, Lady Carolyn Finchley, an irrepressiblematchmaker who plans to find the lady most likely . . .to capture her brother’s untamed heart."]
 ]
-
 
 book_eloisa.each do |book_title, book_publisher, book_year, book_isbn, book_price, book_img, book_description|
   Author.find(1).books.create(title: book_title, publisher: book_publisher, year: book_year,
                               isbn: book_isbn, price: book_price, imgbook: book_img, description: book_description)
 end
-
 Book.find_by(isbn: "9780062037411").authors << Author.find_by(email: "julie@yahoo.com")
-Book.find_by(isbn: "9780062037411").authors <<  Author.find_by(email: "connie@outlook.com")
+
+
+
+book_roth = [["Divergent","HarperCollins",2011,"9780062077011", 5.99, "http://i2.ebkimg.com/previews/000/000602/000602237/000602237-hq-168-80.jpg",
+              "Now includes an excerpt from the upcoming Four: A Divergent Collection.<br/>
+<br/>This first book in Veronica Roth's #1 New York Times bestselling Divergent trilogy is the novel the inspired the major motion picture starring Shailene Woodley, Theo James, and Kate Winslet. This dystopian series set in a futuristic Chicago has captured the hearts of millions of teen and adult readers.
+<br/>Perfect for fans of the Hunger Games and Maze Runner series, Divergent and its sequels, Insurgent and Allegiant, are the gripping story of a dystopian world transformed by courage, self-sacrifice, and love. Fans of the Divergent movie will find the book packed with just as much emotional depth and exhilarating action as the film, all told in beautiful, rich language."]]
+
+book_roth.each do |book_title, book_publisher, book_year, book_isbn, book_price, book_img, book_description|
+  Author.find_by(email:"veronica@roth.com").books.create(title: book_title, publisher: book_publisher, year: book_year,
+                              isbn: book_isbn, price: book_price, imgbook: book_img, description: book_description)
+end
+
+book_gandy = [[
+    "Private Vegas","Random House", 2015, "9781448108428",12.78,"http://i0.ebkimg.com/previews/001/001778/001778235/001778235-hq-168-80.jpg",
+    "Jack Morgan, head of Private Investigations, the global PI agency of the rich and famous, is being pushed to the limit. His car has been firebombed, his ex is dating someone else, and his twin brother is still out to destroy him.
+<br/>But Private doesn’t rest, and nor do its clients: not the LAPD who need Private’s help catching two scumbags with diplomatic immunity, and not the client who has just confessed to murdering his wife."
+]]
+
+book_gandy.each do |book_title, book_publisher, book_year, book_isbn, book_price, book_img, book_description|
+  Author.find_by(email:"ross@gandy.com").books.create(title: book_title, publisher: book_publisher, year: book_year,
+                                                         isbn: book_isbn, price: book_price, imgbook: book_img, description: book_description)
+end
 
 
 book_donald = [
@@ -80,7 +100,6 @@ book_donald.each do |book_title, book_publisher, book_year, book_isbn, book_pric
   Author.find_by(email:"donald@hodges.com").books.create(title: book_title, publisher: book_publisher, year: book_year,
                               isbn: book_isbn, price: book_price, imgbook: book_img, description: book_description)
 end
-
 Book.find_by(isbn: "9780313390531").authors << Author.find_by(email: "ross@gandy.com")
 
 
@@ -89,7 +108,11 @@ Book.find_by(isbn: "9780313390531").authors << Author.find_by(email: "ross@gandy
 literature_and_fiction = Category.create(category_title: "Literature & Fiction")
 literature_and_fiction.books << Book.find_by(isbn: "9780062223920")
 literature_and_fiction.books << Book.find_by(isbn: "9780062037411")
+literature_and_fiction.books << Book.find_by(isbn: "9780062077011")
+literature_and_fiction.books << Book.find_by(isbn: "9781448108428")
 
 music = Category.create(category_title: "Music")
 music.books << Book.find_by(isbn: "9780739130001")
 music.books << Book.find_by(isbn: "9780313390531")
+music.books << Book.find_by(isbn: "9781448108428")
+

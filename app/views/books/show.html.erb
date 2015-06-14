@@ -1,17 +1,179 @@
 <div class="body-background">
   <div class="body-content">
 
+    <fieldset style="text-align: left !important;">
+
+      <legend style="text-align: left !important;"><h3><%= @book.title %></h3></legend>
+      <!--Authors of book-->
+
+          <h5 style="margin-top: 0; padding-top: 0">
+          <!--Show all authors, if the last author, remove character ;-->
+          <% author_book = @author.ids  %>
+          <%= 'by ' %>
+          <% author_book.each do |author_id| %>
+              <% if author_id == author_book.count + author_book.first - 1 %>
+                <%= Author.find_by(id:author_id).name %>
+              <% else %>
+                <%= Author.find_by(id:author_id).name %>
+                <%= ';' %>&nbsp;
+              <% end %>
+
+          <% end %>
+          </h5>
+      <div class="shop" >
+          <!--Book Infos-->
+          <div style="padding: 20px">
+            <!--Left: img and price-->
+            <div style="float: left; margin-right: 20px">
+              <%= image_tag("#{@book.imgbook}",class: "img-book img-thumbnail") %>
+              <div>
+                <%= @book.price %>
+              </div>
+            </div>
+
+            <!--Right: Details-->
+            <div style="float: none">
+
+              <div>
+                <strong>Publisher:</strong> <%= @book.publisher %>; <%= @book.year %>
+              </div>
+
+              <div>
+                <strong>ISBN:</strong> <%= @book.isbn %>
+              </div>
+
+              <strong>Category: </strong>
+
+              <% category_book = @category.ids %>
+              <% category_book.each do |category_id| %>
+                  <%= Category.find(category_id).category_title %>
+              <% end %>
+
+              <!--Description-->
+              <br><strong>Description: </strong><br>
+              <div>
+
+                <% if @book.description.length >250 %>
+                    <%= simple_format(@book.description.split[0...50].join(' ')) %>
+                    <%= link_to '...Read more', '', class: "read-more-#{@book.id}" %>
+                    <script>
+                        $('.read-more-<%= @book.id %>').on('click', function(e) {
+                            e.preventDefault()
+                            $(this).parent().html('<%= escape_javascript simple_format(@book.description) %> <%= link_to ("hide").html_safe,'' %>')
+                        })
+                    </script>
+                <% else %>
+                    <%= simple_format(@book.description) %>
+                <% end %>
+              </div>
+            </div>
+            <div style="clear: both"></div>
+
+          </div>
+
+        </div>
+
+    </fieldset>
+
+
+  <!--Guide book the same category-->
     <div>
-      <%= image_tag("#{@book.imgbook}") %>
+
+      <% category_book = @category.ids %>
+
+        <fieldset style="text-align: left !important">
+          <legend style="text-align: left !important;">
+            <h3> More in:
+              <% category_book.each do |category_id| %>
+                  <% if category_id == category_book.count + category_book.first - 1 %>
+                      <%= Category.find_by(id:category_id).category_title %>
+                  <% else %>
+                      <%= Category.find_by(id:category_id).category_title %>
+                      <%= '-' %>&nbsp;
+                  <% end %>
+              <% end %>
+            </h3>
+          </legend>
+
+          <% arr_book_the_same_category = Array.new %>
+          <% book_the_same_category = Category.new %>
+          <% category_book.each do |category_id| %>
+              <% book_the_same_category = Category.find(category_id).books %>
+              <% book_the_same_category = book_the_same_category.where.not(id: @book.id) %>
+              <% book_the_same_category.each do |book_same_category| %>
+                  <% arr_book_the_same_category <<  book_same_category.id%>
+                  <% arr_book_the_same_category = arr_book_the_same_category.uniq%>
+              <% end %>
+          <% end %>
+
+          <!--Display books the same authors-->
+          <div class="shop" style = "padding-top: 20px; padding-bottom: 20px">
+          <% arr_book_the_same_category.sample(4).each do |book_same_category| %>
+              <div class="shop" style="border: solid 1px #ffffff">
+                <div class="col-sm-3" style="float: left">
+                  <div class="xs-book-img" ><%= image_tag("#{Book.find(book_same_category).imgbook}", class: "img-book img-thumbnail") %></div>
+                  <div class="xs-book">
+                    <div class="book-title" ><%= Book.find(book_same_category).title %></div>
+                    <div class="book-price"><%= "$ " + Book.find(book_same_category).price.to_s %></div>
+                    <div class="xs-book-des"><%= Book.find(book_same_category).description.split[0...50].join(' ') + "..." %></div>
+                  </div>
+                  <div style="clear: both"></div>
+                </div>
+              </div>
+          <% end %>
+          <div style="clear: both"></div>
+          </div>
+        </fieldset>
+  </div>
+
+  <!--Guide book the same authors  -->
+    <!--Get list authors-->
+    <div>
+      <% author_book = @author.ids %>
+
+
+
+      <fieldset style="text-align: left !important;">
+        <legend style="text-align: left !important;">
+          <h3>More by:
+            <% author_book.each do |author_id| %>
+                <% if author_id == author_book.count + author_book.first - 1 %>
+                    <%= Author.find_by(id:author_id).name %>
+                <% else %>
+                    <%= Author.find_by(id:author_id).name %>
+                    <%= '-' %>&nbsp;
+                <% end %>
+            <% end %>
+          </h3>
+        </legend>
+        <!--Array -> the books of all authors-->
+        <% arr_book_the_same_author = Array.new %>
+        <% author_book.each do |author_id| %>
+            <% book_the_same_author = Author.find(author_id).books %>
+            <% book_the_same_author.each do |book_same_author| %>
+                <% arr_book_the_same_author <<  book_same_author.id%>
+                <% arr_book_the_same_author = arr_book_the_same_author.uniq%>
+            <% end %>
+
+        <% end %>
+        <!--Display books the same authors-->
+        <div class="shop" style="padding-top: 20px; padding-bottom: 20px">
+        <% arr_book_the_same_author.sample(4).each do |book_same_author| %>
+          <div>
+            <div class="col-sm-3">
+              <div class="xs-book-img" ><%= image_tag("#{Book.find(book_same_author).imgbook}", class: "img-book img-thumbnail") %></div>
+              <div class="xs-book">
+                <div class="book-title" ><%= Book.find(book_same_author).title %></div>
+                <div class="book-price"><%= "$ " + Book.find(book_same_author).price.to_s %></div>
+                <div class="xs-book-des"><%= Book.find(book_same_author).description.split[0...50].join(' ') + "..." %></div>
+              </div>
+              <div style="clear:both;"></div>
+            </div>
+          </div>
+        <% end %>
+        <div style="clear: both"></div>
+        </div>
+      </fieldset>
     </div>
-
-
-
-    <%= @book.title %>
-
-    <%= @author.ids %>
-
-    <%= @category.ids %>
-
   </div>
 </div>

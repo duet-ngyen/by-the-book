@@ -26,8 +26,8 @@
                       <div class="col-sm-3">
                         <div class="xs-book-img" ><%= image_tag("#{book.imgbook}", class: "img-book img-thumbnail") %></div>
                         <div class="xs-book">
-                          <div class="" ><%= book.title %></div>
-                          <div class=""><%= "USD: " + book.price.to_s %></div>
+                          <div class="book-title" ><%= book.title %></div>
+                          <div class="book-price"><%= "$ " + book.price.to_s %></div>
                           <div class="xs-book-des"><%= book.description.split[0...50].join(' ') + "..." %></div>
                         </div>
                         <div style="clear:both;"></div>
@@ -36,15 +36,15 @@
 
                     <!--Book for mobile screen-->
                     <!--Disable in computer screen-->
-                        <div class="col-sm-3 mobile-book" style="margin-bottom: 10px;">
+                    <div class="col-sm-3 mobile-book">
                           <div class="xs-book-img" ><%= image_tag("#{book.imgbook}", class: "img-book img-thumbnail") %></div>
                           <div class="xs-book">
-                            <%= link_to(book.title, {controller: "books", action: "show", :id => "#{book.id}"}, {class: "mobile-link-title"}) %>
-                            <div><%= "USD: " + book.price.to_s %></div>
-                            <div class="xs-book-des"><%= book.description.split[0...50].join(' ') + "..." %></div>
+                            <%= link_to(book.title, {controller: "books", action: "show", :id => "#{book.id}"}, {class: "mobile-link-title book-title"}) %>
+                            <div class="book-price"><%= "$ " + book.price.to_s %></div>
+                            <div class="xs-book-des"><%= simple_format(book.description.split[0...30].join(' ') + "...") %></div>
                           <div style="clear:both;"></div>
                         </div>
-                          </div>
+                    </div>
 
 
                     <!-- Modal -->
@@ -66,7 +66,7 @@
                                 <% end %>
                               </div>
                               <!--Price-->
-                              <div class="modal-price"><%= "USD: " + book.price.to_s %></div>
+                              <div class="modal-price"><%= "$ " + book.price.to_s %></div>
                               <!--List all category of book-->
                               <% catetory_of_book = book.categories %>
                               <div>
@@ -82,7 +82,7 @@
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-default" style="float: right; margin-left: 20px" data-dismiss="modal">Close</button>
-                            <%= button_to "View details", {controller: "books", action: "show", :id => "#{book.id}"}, {class:"btn btn-primary"} %>
+                            <%= link_to "View details", {controller: "books", action: "show", :id => "#{book.id}"}, {class:"btn btn-primary"} %>
                           </div>
                         </div>
                       </div>

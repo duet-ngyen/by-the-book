@@ -127,9 +127,11 @@
   .xs-book {
     text-align: center;
   }
-
 }
 
+.mobile-book {
+  margin-bottom: 20px;
+}
 
 .navbar-center {
   max-width: 980px;
@@ -200,6 +202,7 @@ legend {
   font-weight: bold;
   font-size: 1.5em;
   font-family: "times new roman", times, serif;
+  padding: 10px 0 10px 0;
 }
 .category {
   border-bottom: solid 1px #90B4CA;
@@ -224,7 +227,21 @@ legend {
   margin-right: 30px;
 }
 
+.book-title {
+  font-weight: bold;
+}
 
+.book-price {
+  font-weight: bold;
+  color: red;
+}
 
+.xs-book-des {
+  font-style: italic;
+}
+
+.fleft {
+  float: left;
+}
 
 
