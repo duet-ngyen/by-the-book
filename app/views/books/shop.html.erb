@@ -16,7 +16,7 @@
                 <%= category.category_title %>
               </div>
               <!--Show books for each category-->
-              <% books_category = category.books %>
+              <% books_category = category.books.sort_by{rand}.slice(0,4) %>
               <div style="width: 100%">
                 <% books_category.each do |book| %>
 

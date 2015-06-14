@@ -81,6 +81,19 @@
 
       <% category_book = @category.ids %>
 
+      <% arr_book_the_same_category = Array.new %>
+      <% book_the_same_category = Category.new %>
+      <% category_book.each do |category_id| %>
+          <% book_the_same_category = Category.find(category_id).books %>
+          <% book_the_same_category = book_the_same_category.where.not(id: @book.id) %>
+          <% book_the_same_category.each do |book_same_category| %>
+              <% arr_book_the_same_category <<  book_same_category.id%>
+              <% arr_book_the_same_category = arr_book_the_same_category.uniq%>
+          <% end %>
+      <% end %>
+
+      <% if arr_book_the_same_category.count > 0 %>
+
         <fieldset style="text-align: left !important">
           <legend style="text-align: left !important;">
             <h3> More in:
@@ -95,16 +108,7 @@
             </h3>
           </legend>
 
-          <% arr_book_the_same_category = Array.new %>
-          <% book_the_same_category = Category.new %>
-          <% category_book.each do |category_id| %>
-              <% book_the_same_category = Category.find(category_id).books %>
-              <% book_the_same_category = book_the_same_category.where.not(id: @book.id) %>
-              <% book_the_same_category.each do |book_same_category| %>
-                  <% arr_book_the_same_category <<  book_same_category.id%>
-                  <% arr_book_the_same_category = arr_book_the_same_category.uniq%>
-              <% end %>
-          <% end %>
+
 
           <!--Display books the same authors-->
           <div class="shop" style = "padding-top: 20px; padding-bottom: 20px">
@@ -124,6 +128,7 @@
           <div style="clear: both"></div>
           </div>
         </fieldset>
+          <% end %>
   </div>
 
   <!--Guide book the same authors  -->
@@ -131,8 +136,18 @@
     <div>
       <% author_book = @author.ids %>
 
+      <!--Array -> the books of all authors-->
+      <% arr_book_the_same_author = Array.new %>
+      <% author_book.each do |author_id| %>
+          <% book_the_same_author = Author.find(author_id).books %>
+          <% book_the_same_author = book_the_same_author.where.not(id: @book.id) %>
+          <% book_the_same_author.each do |book_same_author| %>
+              <% arr_book_the_same_author <<  book_same_author.id%>
+              <% arr_book_the_same_author = arr_book_the_same_author.uniq%>
+          <% end %>
+      <% end %>
 
-
+      <% if arr_book_the_same_author.count > 0 %>
       <fieldset style="text-align: left !important;">
         <legend style="text-align: left !important;">
           <h3>More by:
@@ -146,16 +161,7 @@
             <% end %>
           </h3>
         </legend>
-        <!--Array -> the books of all authors-->
-        <% arr_book_the_same_author = Array.new %>
-        <% author_book.each do |author_id| %>
-            <% book_the_same_author = Author.find(author_id).books %>
-            <% book_the_same_author.each do |book_same_author| %>
-                <% arr_book_the_same_author <<  book_same_author.id%>
-                <% arr_book_the_same_author = arr_book_the_same_author.uniq%>
-            <% end %>
 
-        <% end %>
         <!--Display books the same authors-->
         <div class="shop" style="padding-top: 20px; padding-bottom: 20px">
         <% arr_book_the_same_author.sample(4).each do |book_same_author| %>
@@ -174,6 +180,8 @@
         <div style="clear: both"></div>
         </div>
       </fieldset>
+      <% end %>
+
     </div>
   </div>
 </div>
