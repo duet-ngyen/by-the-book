@@ -138,24 +138,89 @@
           </legend>
 
 
+          <!--Book for computer screen-->
+          <!--Disabled in mobile screen-->
 
-          <!--Display books the same authors-->
-          <div class="shop" style = "padding-top: 20px; padding-bottom: 20px">
-          <% arr_book_the_same_category.sample(4).each do |book_same_category| %>
-              <div class="shop" style="border: solid 1px #ffffff">
-                <div class="col-sm-3" style="float: left">
-                  <div class="xs-book-img" ><%= image_tag("#{Book.find(book_same_category).imgbook}", class: "img-book img-thumbnail") %></div>
-                  <div class="xs-book">
-                    <div class="book-title" ><%= Book.find(book_same_category).title %></div>
-                    <div class="book-price"><%= "$ " + Book.find(book_same_category).price.to_s %></div>
-                    <div class="xs-book-des"><%= Book.find(book_same_category).description.split[0...50].join(' ') + "..." %></div>
-                  </div>
-                  <div style="clear: both"></div>
-                </div>
+              <!--Display books the same authors-->
+              <div class="shop" style = "padding-top: 20px; padding-bottom: 20px">
+                <% arr_book_the_same_category.sample(4).each do |book_same_category| %>
+
+                    <!--Book for mobile screen-->
+                    <!--Disable in computer screen-->
+                    <div class="col-sm-3 mobile-book">
+                      <div class="xs-book-img" ><%= image_tag("#{Book.find(book_same_category).imgbook}", class: "img-book img-thumbnail") %></div>
+                      <div class="xs-book">
+                        <%= link_to(Book.find(book_same_category).title, {controller: "books", action: "show", :id => "#{Book.find(book_same_category).id}"}, {class: "mobile-link-title book-title", method: "get"}) %>
+                        <div class="book-price"><%= "$ " + Book.find(book_same_category).price.to_s %></div>
+                        <div class="xs-book-des"><%= simple_format(Book.find(book_same_category).description.split[0...30].join(' ') + "...") %></div>
+                        <div style="clear:both;"></div>
+                      </div>
+                    </div>
+
+                    <!--Book for computer screen-->
+                    <!--Disabled in mobile screen-->
+                    <%= link_to("#", class:"book-modal", data: {toggle: "modal", target: "#myModal_#{Book.find(book_same_category).id}"}) do %>
+                    <div class="shop" style="border: solid 1px #ffffff">
+                      <div class="col-sm-3" style="float: left">
+                        <div class="xs-book-img" ><%= image_tag("#{Book.find(book_same_category).imgbook}", class: "img-book img-thumbnail") %></div>
+                        <div class="xs-book">
+                          <div class="book-title" ><%= Book.find(book_same_category).title %></div>
+                          <div class="book-price"><%= "$ " + Book.find(book_same_category).price.to_s %></div>
+                          <div class="xs-book-des"><%= Book.find(book_same_category).description.split[0...50].join(' ') + "..." %></div>
+                        </div>
+                        <div style="clear: both"></div>
+                      </div>
+                    </div>
+                    <% end %>
+
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="myModal_<%= Book.find(book_same_category).id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel"><%= Book.find(book_same_category).title %></h4>
+                          </div>
+                          <div class="modal-body">
+                            <div class="modal-book-img" ><%= image_tag("#{Book.find(book_same_category).imgbook}", class: "img-book img-thumbnail") %></div>
+                            <div class="modal-book">
+                              <!--List all author of a book-->
+                              <% authors_of_book = Book.find(book_same_category).authors %>
+                              <div class="modal-author">
+                                <% authors_of_book.each do |author|%>
+                                    <%= link_to("#{author.name}", "author/#{author.id}") %>
+                                <% end %>
+                              </div>
+                              <!--Price-->
+                              <div class="modal-price"><%= "$ " + Book.find(book_same_category).price.to_s %></div>
+                              <!--List all category of book-->
+                              <% catetory_of_book = Book.find(book_same_category).categories %>
+                              <div>
+                                <% catetory_of_book.each do |category| %>
+                                    <%= link_to("#{category.category_title}", "category/#{category.id}") %>
+                                <% end %>
+                              </div>
+                              <div class="modal-book-des"><%= Book.find(book_same_category).description.split[0...50].join(' ') + "..." %></div>
+                            </div>
+                            <div style="clear:both;"></div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" style="float: right; margin-left: 20px" data-dismiss="modal">Close</button>
+                            <%= link_to "View details", {controller: "books", action: "show", :id => "#{Book.find(book_same_category).id}"}, {class:"btn btn-primary", id:"view-details", method: "get"} %>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                <% end %>
+                <div style="clear: both"></div>
               </div>
-          <% end %>
-          <div style="clear: both"></div>
-          </div>
+
+
+
+
+
+
         </fieldset>
           <% end %>
   </div>
