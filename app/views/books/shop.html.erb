@@ -7,10 +7,12 @@
       </div>
     </div>
     <fieldset>
-      <legend>Shop</legend>
+      <legend><h2 style="font: italic normal bold 32px/1.4em 'times new roman',times,serif; padding: 0; margin: 0; text-align: center">Shop</h2></legend>
       <div class="shop">
-        <!--Show all category-->
-        <% Category.all.each do |category| %>
+        <!--Show random 4 categories-->
+        <% Category.limit(4).order("RANDOM()").each do |category| %>
+            <% if category.books.count > 0 %>
+
           <div class="category">
               <div class="category-title">
                 <%= category.category_title %>
@@ -92,9 +94,9 @@
 
                 <% end %>
               </div>
-              <div style="clear: both"></div>
+              <div style="clear: both; margin-bottom: 30px"></div>
             </div>
-
+            <% end %>
         <% end %>
       </div>
     </fieldset>

@@ -116,3 +116,6 @@ music.books << Book.find_by(isbn: "9780739130001")
 music.books << Book.find_by(isbn: "9780313390531")
 music.books << Book.find_by(isbn: "9781448108428")
 
+
+test = Category.create(category_title: "Test")
+
