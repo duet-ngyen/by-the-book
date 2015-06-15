@@ -51,21 +51,50 @@
 
               <!--Description-->
               <br><strong>Description: </strong><br>
-              <div>
 
-                <% if @book.description.length >250 %>
-                    <%= simple_format(@book.description.split[0...50].join(' ')) %>
-                    <%= link_to '...Read more', '', class: "read-more-#{@book.id}" %>
-                    <script>
-                        $('.read-more-<%= @book.id %>').on('click', function(e) {
-                            e.preventDefault()
-                            $(this).parent().html('<%= escape_javascript simple_format(@book.description) %> <%= link_to ("hide").html_safe,'' %>')
-                        })
-                    </script>
-                <% else %>
-                    <%= simple_format(@book.description) %>
-                <% end %>
+              <div >
+                <span class="more"><%= raw(@book.description) %></span>
               </div>
+
+            <script>
+                $(document).ready(function() {
+                    // Configure/customize these variables.
+                    var showChar = 200; // How many characters are shown by default
+                    var ellipsestext = "...";
+                    var moretext = "Show more >";
+                    var lesstext = "Show less";
+
+
+                    $('.more').each(function() {
+                        var content = $(this).html();
+
+                        if(content.length > showChar) {
+
+                            var c = content.substr(0, showChar);
+                            var h = content.substr(showChar, content.length - showChar);
+
+                            var html = c + '<span class="moreellipses">' + ellipsestext+ '&nbsp;</span><span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">' + moretext + '</a></span>';
+
+                            $(this).html(html);
+                        }
+
+                    });
+
+                    $(".morelink").click(function(){
+                        if($(this).hasClass("less")) {
+                            $(this).removeClass("less");
+                            $(this).html(moretext);
+                        } else {
+                            $(this).addClass("less");
+                            $(this).html(lesstext);
+                        }
+                        $(this).parent().prev().toggle();
+                        $(this).prev().toggle();
+                        return false;
+                    });
+                });
+            </script>
+
             </div>
             <div style="clear: both"></div>
 

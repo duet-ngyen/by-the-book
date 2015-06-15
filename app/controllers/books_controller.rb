@@ -13,6 +13,7 @@ class BooksController < ApplicationController
 
     respond_to do |format|
       format.html {render 'show'}
+      format.json{ render :json => @book.to_json, status: :ok }
     end
   end
 

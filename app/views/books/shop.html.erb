@@ -34,12 +34,14 @@
                       </div>
                     <% end %>
 
+
+
                     <!--Book for mobile screen-->
                     <!--Disable in computer screen-->
                     <div class="col-sm-3 mobile-book">
                           <div class="xs-book-img" ><%= image_tag("#{book.imgbook}", class: "img-book img-thumbnail") %></div>
                           <div class="xs-book">
-                            <%= link_to(book.title, {controller: "books", action: "show", :id => "#{book.id}"}, {class: "mobile-link-title book-title"}) %>
+                            <%= link_to(book.title, {controller: "books", action: "show", :id => "#{book.id}"}, {class: "mobile-link-title book-title", method: "get"}) %>
                             <div class="book-price"><%= "$ " + book.price.to_s %></div>
                             <div class="xs-book-des"><%= simple_format(book.description.split[0...30].join(' ') + "...") %></div>
                           <div style="clear:both;"></div>
@@ -82,7 +84,7 @@
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-default" style="float: right; margin-left: 20px" data-dismiss="modal">Close</button>
-                            <%= link_to "View details", {controller: "books", action: "show", :id => "#{book.id}"}, {class:"btn btn-primary"} %>
+                            <%= link_to "View details", {controller: "books", action: "show", :id => "#{book.id}"}, {class:"btn btn-primary", id:"view-details", method: "get"} %>
                           </div>
                         </div>
                       </div>

@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   root 'books#shop'
 
-  post 'book/:id' => 'books#show'
+
 
   get 'book/:id' => 'books#show'
 
