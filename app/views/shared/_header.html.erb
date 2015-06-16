@@ -22,7 +22,13 @@
           <li><a href="#">About</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="#">Login</a></li>
+          <li>
+            <% if current_user %>
+              <%= link_to "Log out", {controller: "users/sessions", action: "destroy"}, {method: "delete"} %>
+            <% else %>
+              <%= link_to "Log In", {controller: "users/sessions", action: "new"}, {method: "get"} %>
+            <% end %>
+          </li>
         </ul>
       </div>
     </div>

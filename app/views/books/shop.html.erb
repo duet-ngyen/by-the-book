@@ -80,7 +80,7 @@
                               </div>
 
 
-                              <div class="modal-book-des"><%= book.description.split[0...50].join(' ') + "..." %></div>
+                              <div class="modal-book-des"><%= raw(book.description.split[0...50].join(' ')) + "..." %></div>
                             </div>
                             <div style="clear:both;"></div>
                           </div>

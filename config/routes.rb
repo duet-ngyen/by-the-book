@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'home/index'
+
+  get 'home/index'
+
   get 'books/index'
 
   get 'books/show'
@@ -7,13 +11,25 @@ Rails.application.routes.draw do
 
   root 'books#shop'
 
-
-
   get 'book/:id' => 'books#show'
 
   get 'author/:id' => 'books#show'
 
   get 'category/:id' => 'books#show'
+
+
+  #for user sign up, sign in, sign out
+  devise_for :users, controllers: { sessions: "users/sessions" }
+  #
+  #
+  devise_scope :user do
+    authenticated :user do
+      root 'home#index', as: :authenticated_root
+    end
+    unauthenticated do
+      root 'users/sessions#new', as: :unauthenticated_root
+    end
+  end
 
 
 

@@ -34,23 +34,32 @@
             <!--Right: Details-->
             <div style="float: none">
 
-              <div>
-                <strong>Publisher:</strong> <%= @book.publisher %>; <%= @book.year %>
-              </div>
-
-              <div>
-                <strong>ISBN:</strong> <%= @book.isbn %>
-              </div>
-
-              <strong>Category: </strong>
-
-              <% category_book = @category.ids %>
-              <% category_book.each do |category_id| %>
-                  <%= Category.find(category_id).category_title %>
-              <% end %>
+              <table>
+                <tr >
+                  <td style="padding-right: 30px"><strong>Publisher:</strong></td>
+                  <td><%= @book.publisher %>; <%= @book.year %></td>
+                </tr>
+                <tr>
+                  <td><strong>ISBN:</strong></td>
+                  <td><%= @book.isbn %></td>
+                </tr>
+                <tr>
+                  <td><strong>Category: </strong></td>
+                  <td>
+                    <% category_book = @category.ids %>
+                    <% category_book.each do |category_id| %>
+                        <%= Category.find(category_id).category_title %>
+                    <% end %>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Description:</strong></td>
+                  <td></td>
+                </tr>
+              </table>
 
               <!--Description-->
-              <br><strong>Description: </strong><br>
+
 
               <div >
                 <span class="more"><%= raw(@book.description) %></span>
@@ -227,7 +236,7 @@
                                     <%= link_to("#{category.category_title}", "category/#{category.id}") %>
                                 <% end %>
                               </div>
-                              <div class="modal-book-des"><%= Book.find(book_same_category).description.split[0...50].join(' ') + "..." %></div>
+                              <div class="modal-book-des"><%= raw(Book.find(book_same_category).description.split[0...50].join(' ')) + "..." %></div>
                             </div>
                             <div style="clear:both;"></div>
                           </div>
@@ -364,7 +373,7 @@
                             <%= link_to("#{category.category_title}", "category/#{category.id}") %>
                         <% end %>
                       </div>
-                      <div class="modal-book-des"><%= Book.find(book_same_author).description.split[0...50].join(' ') + "..." %></div>
+                      <div class="modal-book-des"><%= raw(Book.find(book_same_author).description.split[0...50].join(' ')) + "..." %></div>
                     </div>
                     <div style="clear:both;"></div>
                   </div>
