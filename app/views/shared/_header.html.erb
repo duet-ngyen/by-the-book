@@ -24,9 +24,10 @@
           <% end %>
 
           <% if yield(:title) == "SHOP"%>
-            <li class="active"> <%= link_to "Shop", {controller: "books", action: "shop"} %> </li>
+             <li class="active"><%= link_to "Shop", {controller: "books", action: "shop"}, {method: :get} %></li>
           <% else %>
-              <li class="#"> <%= link_to "Shop", {controller: "books", action: "shop"} %> </li>
+              <!--error when use then same above {controller, action}-->
+            <li><%= link_to "Shop", books_shop_path %></li>
           <% end %>
 
           <% if yield(:title) == "BLOG"%>
