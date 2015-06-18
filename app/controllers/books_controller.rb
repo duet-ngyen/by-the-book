@@ -7,7 +7,7 @@ class BooksController < ApplicationController
   def show
     # @book = Book.where(id: params[:id]).first
 
-    @book = Book.where(id: params[:id]).first
+    @book = Book.find(params[:id])
 
     @cart_action = @book.cart_action current_user.try :id
 

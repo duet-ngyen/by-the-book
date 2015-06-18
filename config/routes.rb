@@ -3,8 +3,6 @@ Rails.application.routes.draw do
 
   get 'home/index'
 
-  get 'home/index'
-
   get 'books/index'
 
   get 'books/show'
@@ -21,7 +19,11 @@ Rails.application.routes.draw do
 
 
   #for user sign up, sign in, sign out
-  devise_for :users, controllers: { sessions: "users/sessions" }
+  devise_for :users, controllers: { sessions: "users/sessions" }, path_names: {
+                       sign_in: 'login',
+                       sign_out: 'logout',
+                       sign_up: 'register'
+                   }
   #
   #
   devise_scope :user do
@@ -34,9 +36,11 @@ Rails.application.routes.draw do
   end
 
 
+  resources :books
+
   resource :cart, only: [:show] do
-    put 'add/:movie_id', to: 'carts#add', as: :add_to
-    put 'remove/:movie_id', to: 'carts#remove', as: :remove_from
+    put 'add/:book_id', to: 'carts#add', as: :add_to
+    put 'remove/:book_id', to: 'carts#remove', as: :remove_from
   end
 
 

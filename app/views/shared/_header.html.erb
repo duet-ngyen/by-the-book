@@ -43,18 +43,31 @@
           <% end %>
 
         </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li>
-            <% if current_user %>
-              <%= link_to cart_path do %>
-                My Cart(<%= current_user.cart_count %>)
-              <% end %>
-              <%= link_to "Log out", {controller: "users/sessions", action: "destroy"}, {method: "delete"} %>
-            <% else %>
-              <%= link_to "Log In", {controller: "users/sessions", action: "new"}, {method: "get"} %>
-            <% end %>
-          </li>
+
+        <ul class="nav navbar-nav navbar-right inline">
+          <% if current_user %>
+              <li>
+                  <%= link_to cart_path do %>
+                    <i class="fa fa-shopping-cart"></i>
+                    My Cart:
+                    <span class="cart-count"><%= current_user.cart_count %></span>
+                  <% end %>
+              </li>
+              <li>
+                <%= link_to current_user.email, edit_user_registration_path  %>
+              </li>
+              <li>
+                <%= link_to "Log out", {controller: "users/sessions", action: "destroy"}, {method: "delete"} %>
+              </li>
+          <% else %>
+              <li>
+                  <%= link_to "Log In", {controller: "users/sessions", action: "new"}, {method: "get"} %>
+              </li>
+          <% end %>
+
         </ul>
+
+
       </div>
     </div>
   </nav>

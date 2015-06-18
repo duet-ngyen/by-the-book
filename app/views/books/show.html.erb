@@ -29,6 +29,7 @@
               <%= image_tag("#{@book.imgbook}",class: "img-book img-thumbnail") %>
               <div>
                 <%= @book.price %>
+
                 <!--Button Add to cart-->
                 <% if signed_in? %>
                     <%= link_to "", class: "btn btn-primary", data: {target: @cart_action,
@@ -36,6 +37,7 @@
                         <span><%= @cart_action %></span> Cart
                     <% end %>
                 <% end %>
+
               </div>
             </div>
 
