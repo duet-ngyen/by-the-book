@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'carts/show'
+
   get 'home/index'
 
   get 'home/index'
@@ -32,6 +34,10 @@ Rails.application.routes.draw do
   end
 
 
+  resource :cart, only: [:show] do
+    put 'add/:movie_id', to: 'carts#add', as: :add_to
+    put 'remove/:movie_id', to: 'carts#remove', as: :remove_from
+  end
 
 
   # The priority is based upon order of creation: first created -> highest priority.

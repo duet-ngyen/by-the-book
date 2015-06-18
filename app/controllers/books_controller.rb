@@ -5,7 +5,11 @@ class BooksController < ApplicationController
   end
 
   def show
+    # @book = Book.where(id: params[:id]).first
+
     @book = Book.where(id: params[:id]).first
+
+    @cart_action = @book.cart_action current_user.try :id
 
     @author = @book.authors
 

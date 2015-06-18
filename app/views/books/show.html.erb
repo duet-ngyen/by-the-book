@@ -1,4 +1,4 @@
-<% provide(:title, "BOOK | #{@book.title.upcase}") %>
+<% provide(:title, "| BOOK | #{@book.title.upcase}") %>
 <div class="body-background">
   <div class="body-content">
 
@@ -29,6 +29,13 @@
               <%= image_tag("#{@book.imgbook}",class: "img-book img-thumbnail") %>
               <div>
                 <%= @book.price %>
+                <!--Button Add to cart-->
+                <% if signed_in? %>
+                    <%= link_to "", class: "btn btn-primary", data: {target: @cart_action,
+                                                                     addUrl: add_to_cart_path(@book), removeUrL: remove_from_cart_path(@book)} do %>
+                        <span><%= @cart_action %></span> Cart
+                    <% end %>
+                <% end %>
               </div>
             </div>
 
