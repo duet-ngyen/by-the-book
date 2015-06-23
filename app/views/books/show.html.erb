@@ -25,7 +25,7 @@
           <!--Book Infos-->
           <div style="padding: 20px">
             <!--Left: img and price-->
-            <div style="float: left; margin-right: 20px; text-align: center" class="col-sm-3 col-xs-12">
+            <div style="margin-right: 20px; text-align: center" class="col-sm-3 col-xs-12">
               <%= image_tag("#{@book.imgbook}",class: "img-book img-thumbnail") %>
               <div>
                 <%= @book.price %>
@@ -42,11 +42,10 @@
             </div>
 
             <!--Right: Details-->
-            <div style="float: none">
-
+            <div class="col-sm-8">
               <table>
                 <tr >
-                  <td style="padding-right: 30px"><strong>Publisher:</strong></td>
+                  <td style=""><strong>Publisher:</strong></td>
                   <td><%= @book.publisher %>; <%= @book.year %></td>
                 </tr>
                 <tr>
@@ -64,16 +63,16 @@
                 </tr>
                 <tr>
                   <td><strong>Description:</strong></td>
-                  <td></td>
                 </tr>
               </table>
+              <div >
+                <span class="more"><%= raw(@book.description) %></span>
+              </div>
 
               <!--Description-->
 
 
-              <div >
-                <span class="more"><%= raw(@book.description) %></span>
-              </div>
+
 
             <script>
                 $(document).ready(function() {

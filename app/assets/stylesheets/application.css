@@ -15,3 +15,29 @@
  *= require_bootstrap
 
  */
+.copyright {
+    clear: both;
+}
+
+.text-c {
+    text-align: center;
+}
+
+.navbar {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.navbar a:hover{
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.navbar a{
+    text-decoration: none;
+}
+
+footer {
+    background-color: #000000;
+    color: #ffffff;
+}

@@ -1,5 +1,8 @@
-
-<div class="login-form">
+<div style="margin-top: 50px"></div>
+<% provide(:title, "| LOGIN") %>
+<div class="body-background">
+  <div class="body-content">
+<div>
   <h2 >Log in</h2>
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
@@ -20,9 +23,11 @@
   <% end -%>
 
   <div class="actions">
-    <%= f.submit "Log in",  :class=>"btn btn-primary btn-block" %>
+    <%= f.submit "Log in",  :class=>"btn btn-primary" %>
   </div>
 <% end %>
 
 <%= render "users/shared/links" %>
+</div>
+      </div>
 </div>
