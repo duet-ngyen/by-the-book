@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'uploads/new'
+
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   get 'categories/show_category'
 
   get 'authors/show_author'

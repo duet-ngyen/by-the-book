@@ -31,5 +31,8 @@ module ByTheBook
     config.assets.paths << "#{Rails}/vendor/assets/fonts"
 
     config.assets.initialize_on_precompile = false
+
+    # for uploader
+    config.autoload_paths += %W(#{config.root}/lib #{config.root}/app/uploaders)
   end
 end

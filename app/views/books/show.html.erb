@@ -26,12 +26,12 @@
           <div style="padding: 20px">
             <!--Left: img and price-->
             <div style="float: left; margin-right: 20px; text-align: center" class="col-sm-3 col-xs-12">
-              <%= image_tag("#{@book.imgbook}",class: "img-book img-thumbnail") %>
+              <%= image_tag("#{@book.imgbook_url}",class: "img-book img-thumbnail") %>
               <div>
                 <%= @book.price %>
 
                 <!--Button Add to cart-->
-                <% if signed_in? %>
+                <% if current_user %>
                     <%= link_to "", class: "btn btn-primary", data: {target: @cart_action,
                                                                      addUrl: add_to_cart_path(@book), removeUrL: remove_from_cart_path(@book)} do %>
                         <span><%= @cart_action %></span> Cart
@@ -167,7 +167,7 @@
                     <!--Disable in computer screen-->
                     <div class="col-sm-3 mobile-book">
                       <div class="xs-book-img" >
-                        <%= image_tag("#{Book.find(book_same_category).imgbook}", class: "img-book img-thumbnail") %>
+                        <%= image_tag("#{Book.find(book_same_category).imgbook_url}", class: "img-book img-thumbnail") %>
                       </div>
                       <div class="xs-book">
                         <%= link_to(Book.find(book_same_category).title, {controller: "books", action: "show", :id => "#{Book.find(book_same_category).id}"}, {class: "mobile-link-title book-title", method: "get"}) %>
@@ -193,7 +193,7 @@
                     <div class="shop" style="border: solid 1px #ffffff">
                       <div class="col-sm-3" style="float: left">
                         <div class="xs-book-img" >
-                          <%= image_tag("#{Book.find(book_same_category).imgbook}", class: "img-book img-thumbnail") %>
+                          <%= image_tag("#{Book.find(book_same_category).imgbook_url}", class: "img-book img-thumbnail") %>
                         </div>
                         <div class="xs-book">
                           <div class="book-title" ><%= Book.find(book_same_category).title %></div>
@@ -228,13 +228,13 @@
                             <h4 class="modal-title" id="myModalLabel"><%= Book.find(book_same_category).title %></h4>
                           </div>
                           <div class="modal-body">
-                            <div class="modal-book-img" ><%= image_tag("#{Book.find(book_same_category).imgbook}", class: "img-book img-thumbnail") %></div>
+                            <div class="modal-book-img" ><%= image_tag("#{Book.find(book_same_category).imgbook_url}", class: "img-book img-thumbnail") %></div>
                             <div class="modal-book">
                               <!--List all author of a book-->
                               <% authors_of_book = Book.find(book_same_category).authors %>
                               <div class="modal-author">
                                 <% authors_of_book.each do |author|%>
-                                    <%= link_to("#{author.name}", "author/#{author.id}") %>
+                                    <%= link_to("#{author.name}", {controller: "authors", action: "show_author", :id => author.id}, {method: 'get'}) %>
                                 <% end %>
                               </div>
                               <!--Price-->
@@ -243,7 +243,7 @@
                               <% catetory_of_book = Book.find(book_same_category).categories %>
                               <div>
                                 <% catetory_of_book.each do |category| %>
-                                    <%= link_to("#{category.category_title}", "category/#{category.id}") %>
+                                    <%= link_to("#{category.category_title}", {controller: "categories", action: "show_category", :id => category.id}) %>
                                 <% end %>
                               </div>
                               <div class="modal-book-des"><%= raw(Book.find(book_same_category).description.split[0...50].join(' ')) + "..." %></div>
@@ -303,7 +303,7 @@
             <!--Disable in computer screen-->
             <div class="col-sm-3 mobile-book">
                 <div class="col-sm-3">
-                  <div class="xs-book-img" ><%= image_tag("#{Book.find(book_same_author).imgbook}", class: "img-book img-thumbnail") %></div>
+                  <div class="xs-book-img" ><%= image_tag("#{Book.find(book_same_author).imgbook_url}", class: "img-book img-thumbnail") %></div>
                   <div class="xs-book">
 
                     <%= link_to(Book.find(book_same_author).title,
@@ -332,9 +332,9 @@
 
             <!--Book for computer screen-->
             <!--Disabled in mobile screen-->
-            <%= link_to("#", class:"book-modal", data: {toggle: "modal", target: "#myModal_#{Book.find(book_same_author).id}"}) do %>
+            <%= link_to("#", class:"book-modal", data: {toggle: "modal", target: "#book_author_#{Book.find(book_same_author).id}"}) do %>
             <div class="col-sm-3">
-              <div class="xs-book-img" ><%= image_tag("#{Book.find(book_same_author).imgbook}", class: "img-book img-thumbnail") %></div>
+              <div class="xs-book-img" ><%= image_tag("#{Book.find(book_same_author).imgbook_url}", class: "img-book img-thumbnail") %></div>
               <div class="xs-book">
                 <div class="book-title" ><%= Book.find(book_same_author).title %></div>
                 <div>
@@ -357,21 +357,22 @@
             <% end %>
 
             <!-- Modal -->
-            <div class="modal fade" id="myModal_<%= Book.find(book_same_author).id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal fade" id="book_author_<%= Book.find(book_same_author).id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="myModalLabel"><%= Book.find(book_same_author).title %></h4>
+
                   </div>
                   <div class="modal-body">
-                    <div class="modal-book-img" ><%= image_tag("#{Book.find(book_same_author).imgbook}", class: "img-book img-thumbnail") %></div>
+                    <div class="modal-book-img" ><%= image_tag("#{Book.find(book_same_author).imgbook_url}", class: "img-book img-thumbnail") %></div>
                     <div class="modal-book">
                       <!--List all author of a book-->
                       <% authors_of_book = Book.find(book_same_author).authors %>
                       <div class="modal-author">
                         <% authors_of_book.each do |author|%>
-                            <%= link_to("#{author.name}", "author/#{author.id}") %>
+                            <%= link_to("#{author.name}", {controller: "authors", action: "show_author", :id => author.id}, {method: 'get'} ) %>
                         <% end %>
                       </div>
                       <!--Price-->
@@ -380,7 +381,7 @@
                       <% catetory_of_book = Book.find(book_same_author).categories %>
                       <div>
                         <% catetory_of_book.each do |category| %>
-                            <%= link_to("#{category.category_title}", "category/#{category.id}") %>
+                            <%= link_to("#{category.category_title}", {controller: "categories", action: "show_category", :id => category.id}) %>
                         <% end %>
                       </div>
                       <div class="modal-book-des"><%= raw(Book.find(book_same_author).description.split[0...50].join(' ')) + "..." %></div>

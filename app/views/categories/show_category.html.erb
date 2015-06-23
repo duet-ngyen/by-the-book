@@ -15,7 +15,7 @@
                   <!--Disable in computer screen-->
                   <div class="col-sm-3 mobile-book">
                     <div class="xs-book-img" >
-                      <%= image_tag(book.imgbook, class: "img-book img-thumbnail") %>
+                      <%= image_tag(book.imgbook_url, class: "img-book img-thumbnail") %>
                     </div>
 
                     <div class="xs-book">
@@ -33,7 +33,7 @@
                       <div style="border: solid 1px #ffffff">
                         <div class="col-sm-3">
                           <div class="xs-book-img" >
-                            <%= image_tag(book.imgbook, class: "img-book img-thumbnail") %>
+                            <%= image_tag(book.imgbook_url, class: "img-book img-thumbnail") %>
                           </div>
                           <div class="xs-book">
                             <div class="book-title" ><%= book.title %></div>
@@ -54,7 +54,7 @@
                           <h4 class="modal-title" id="myModalLabel"><%= book.title %></h4>
                         </div>
                         <div class="modal-body">
-                          <div class="modal-book-img" ><%= image_tag(book.imgbook, class: "img-book img-thumbnail") %></div>
+                          <div class="modal-book-img" ><%= image_tag(book.imgbook_url, class: "img-book img-thumbnail") %></div>
                           <div class="modal-book">
                             <!--List all author of a book-->
                             <% authors_of_book = book.authors %>
@@ -69,7 +69,7 @@
                             <% catetory_of_book = book.categories %>
                             <div>
                               <% catetory_of_book.each do |category| %>
-                                  <%= link_to("#{category.category_title}", "#") %>
+                                  <%= link_to("#{category.category_title}", {controller: "categories", action: "show_category", :id => category.id}, {method: "get"}) %>
                               <% end %>
                             </div>
                             <div class="modal-book-des"><%= raw(book.description.split[0...50].join(' ')) + "..." %></div>

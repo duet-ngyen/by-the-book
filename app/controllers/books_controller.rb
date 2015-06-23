@@ -24,4 +24,13 @@ class BooksController < ApplicationController
   def shop
 
   end
+
+  # def create
+  #   @test = Book.create(book_params)
+  # end
+  #
+  # def book_params
+  #   params.require(:book).permit(:title,:imgbook)
+  # end
+
 end

@@ -4,7 +4,7 @@
     <fieldset style="text-align: left !important;">
       <legend style="text-align: left !important;"><h3><%= @author.name %></h3></legend>
       <div class="col-sm-4 col-xs-12" style="text-align: center">
-        <%= image_tag(@author.avatar, class: "avatar-author") %>
+        <%= image_tag(@author.avatar_url, class: "avatar-author") %>
       </div>
       <div class="col-sm-8">
         <table>
@@ -79,7 +79,7 @@
             <!--Disable in computer screen-->
             <div class="col-sm-3 mobile-book">
               <div class="xs-book-img" >
-                <%= image_tag(book.imgbook, class: "img-book img-thumbnail") %>
+                <%= image_tag(book.imgbook_url, class: "img-book img-thumbnail") %>
               </div>
 
               <div class="xs-book">
@@ -93,11 +93,11 @@
 
             <!--Book for computer screen-->
             <!--Disabled in mobile screen-->
-            <%= link_to("#", class:"book-modal", data: {toggle: "modal", target: "#myModal_#{book.id}"}) do %>
+            <%= link_to("#", class:"book-modal", data: {toggle: "modal", target: "#showauthor_#{book.id}"}) do %>
                   <div style="border: solid 1px #ffffff">
                   <div class="col-sm-3">
                     <div class="xs-book-img" >
-                      <%= image_tag(book.imgbook, class: "img-book img-thumbnail") %>
+                      <%= image_tag(book.imgbook_url, class: "img-book img-thumbnail") %>
                     </div>
                     <div class="xs-book">
                       <div class="book-title" ><%= book.title %></div>
@@ -110,7 +110,7 @@
 
 
             <!-- Modal -->
-            <div class="modal fade" id="myModal_<%= book.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal fade" id="showauthor_<%= book.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -118,7 +118,7 @@
                     <h4 class="modal-title" id="myModalLabel"><%= book.title %></h4>
                   </div>
                   <div class="modal-body">
-                    <div class="modal-book-img" ><%= image_tag(book.imgbook, class: "img-book img-thumbnail") %></div>
+                    <div class="modal-book-img" ><%= image_tag(book.imgbook_url, class: "img-book img-thumbnail") %></div>
                     <div class="modal-book">
                       <!--List all author of a book-->
                       <% authors_of_book = book.authors %>
@@ -133,7 +133,7 @@
                       <% catetory_of_book = book.categories %>
                       <div>
                         <% catetory_of_book.each do |category| %>
-                            <%= link_to("#{category.category_title}", "#") %>
+                            <%= link_to("#{category.category_title}", {controller: "categories", action: "show_category", :id => category.id}) %>
                         <% end %>
                       </div>
                       <div class="modal-book-des"><%= raw(book.description.split[0...50].join(' ')) + "..." %></div>
