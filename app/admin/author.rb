@@ -41,12 +41,12 @@ ActiveAdmin.register Author do
 
   # Form example edit
   form do |f|
-    f.inputs 'Book Details' do
+    f.inputs 'Author Details' do
       f.input :name
       f.input :email
     end
-    f.inputs 'Images' do
-      f.input :avatar, :label => 'Book image', as: :file # f.input :publisher
+    f.inputs 'Avatar' do
+      f.input :avatar, :label => 'Author avatar', as: :file # f.input :publisher
     end
     f.actions
   end

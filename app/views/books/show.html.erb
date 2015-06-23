@@ -26,7 +26,7 @@
           <div style="padding: 20px">
             <!--Left: img and price-->
             <div style="float: left; margin-right: 20px; text-align: center" class="col-sm-3 col-xs-12">
-              <%= image_tag("#{@book.imgbook_url}",class: "img-book img-thumbnail") %>
+              <%= image_tag("#{@book.imgbook}",class: "img-book img-thumbnail") %>
               <div>
                 <%= @book.price %>
 
@@ -167,7 +167,7 @@
                     <!--Disable in computer screen-->
                     <div class="col-sm-3 mobile-book">
                       <div class="xs-book-img" >
-                        <%= image_tag("#{Book.find(book_same_category).imgbook_url}", class: "img-book img-thumbnail") %>
+                        <%= image_tag("#{Book.find(book_same_category).imgbook}", class: "img-book img-thumbnail") %>
                       </div>
                       <div class="xs-book">
                         <%= link_to(Book.find(book_same_category).title, {controller: "books", action: "show", :id => "#{Book.find(book_same_category).id}"}, {class: "mobile-link-title book-title", method: "get"}) %>
@@ -193,7 +193,7 @@
                     <div class="shop" style="border: solid 1px #ffffff">
                       <div class="col-sm-3" style="float: left">
                         <div class="xs-book-img" >
-                          <%= image_tag("#{Book.find(book_same_category).imgbook_url}", class: "img-book img-thumbnail") %>
+                          <%= image_tag("#{Book.find(book_same_category).imgbook}", class: "img-book img-thumbnail") %>
                         </div>
                         <div class="xs-book">
                           <div class="book-title" ><%= Book.find(book_same_category).title %></div>
@@ -228,7 +228,7 @@
                             <h4 class="modal-title" id="myModalLabel"><%= Book.find(book_same_category).title %></h4>
                           </div>
                           <div class="modal-body">
-                            <div class="modal-book-img" ><%= image_tag("#{Book.find(book_same_category).imgbook_url}", class: "img-book img-thumbnail") %></div>
+                            <div class="modal-book-img" ><%= image_tag("#{Book.find(book_same_category).imgbook}", class: "img-book img-thumbnail") %></div>
                             <div class="modal-book">
                               <!--List all author of a book-->
                               <% authors_of_book = Book.find(book_same_category).authors %>
@@ -303,7 +303,7 @@
             <!--Disable in computer screen-->
             <div class="col-sm-3 mobile-book">
                 <div class="col-sm-3">
-                  <div class="xs-book-img" ><%= image_tag("#{Book.find(book_same_author).imgbook_url}", class: "img-book img-thumbnail") %></div>
+                  <div class="xs-book-img" ><%= image_tag("#{Book.find(book_same_author).imgbook}", class: "img-book img-thumbnail") %></div>
                   <div class="xs-book">
 
                     <%= link_to(Book.find(book_same_author).title,
@@ -334,7 +334,7 @@
             <!--Disabled in mobile screen-->
             <%= link_to("#", class:"book-modal", data: {toggle: "modal", target: "#book_author_#{Book.find(book_same_author).id}"}) do %>
             <div class="col-sm-3">
-              <div class="xs-book-img" ><%= image_tag("#{Book.find(book_same_author).imgbook_url}", class: "img-book img-thumbnail") %></div>
+              <div class="xs-book-img" ><%= image_tag("#{Book.find(book_same_author).imgbook}", class: "img-book img-thumbnail") %></div>
               <div class="xs-book">
                 <div class="book-title" ><%= Book.find(book_same_author).title %></div>
                 <div>
@@ -366,7 +366,7 @@
 
                   </div>
                   <div class="modal-body">
-                    <div class="modal-book-img" ><%= image_tag("#{Book.find(book_same_author).imgbook_url}", class: "img-book img-thumbnail") %></div>
+                    <div class="modal-book-img" ><%= image_tag("#{Book.find(book_same_author).imgbook}", class: "img-book img-thumbnail") %></div>
                     <div class="modal-book">
                       <!--List all author of a book-->
                       <% authors_of_book = Book.find(book_same_author).authors %>
