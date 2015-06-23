@@ -1,0 +1,162 @@
+<% provide(:title, "| AUTHOR | #{@author.name.upcase}") %>
+<div class="body-background">
+  <div class="body-content">
+    <fieldset style="text-align: left !important;">
+      <legend style="text-align: left !important;"><h3><%= @author.name %></h3></legend>
+      <div class="col-sm-4 col-xs-12" style="text-align: center">
+        <%= image_tag(@author.avatar, class: "avatar-author") %>
+      </div>
+      <div class="col-sm-8">
+        <table>
+          <tr>
+            <td style="padding-right: 30px"><strong>Email:</strong></td>
+            <td><%= @author.email %></td>
+          </tr>
+          <tr>
+            <td><strong>Country:</strong></td>
+            <td><%= @author.country %></td>
+          </tr>
+          <tr>
+            <td><strong>Birth:</strong></td>
+            <td><%= @author.birth %></td>
+          </tr>
+          <tr>
+            <td><strong>About:</strong></td>
+          </tr>
+        </table>
+        <span class="more"><%= @author.about %></span>
+        <script>
+            $(document).ready(function() {
+                // Configure/customize these variables.
+                var showChar = 300; // How many characters are shown by default
+                var ellipsestext = "...";
+                var moretext = "Show more >";
+                var lesstext = "Show less";
+
+
+                $('.more').each(function() {
+                    var content = $(this).html();
+
+                    if(content.length > showChar) {
+
+                        var c = content.substr(0, showChar);
+                        var h = content.substr(showChar, content.length - showChar);
+
+                        var html = c + '<span class="moreellipses">' + ellipsestext+ '&nbsp;</span><span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">' + moretext + '</a></span>';
+
+                        $(this).html(html);
+                    }
+
+                });
+
+                $(".morelink").click(function(){
+                    if($(this).hasClass("less")) {
+                        $(this).removeClass("less");
+                        $(this).html(moretext);
+                    } else {
+                        $(this).addClass("less");
+                        $(this).html(lesstext);
+                    }
+                    $(this).parent().prev().toggle();
+                    $(this).prev().toggle();
+                    return false;
+                });
+            });
+        </script>
+      </div>
+    </fieldset>
+
+    <% all_book_of_author = @author.books %>
+    <% if all_book_of_author.count > 0 %>
+      <fieldset style="text-align: left !important;">
+        <legend style="text-align: left !important;"><h3>Books by <%= @author.name %></h3></legend>
+
+        <div class="shop" style = "padding-top: 20px; padding-bottom: 20px">
+
+        <% all_book_of_author.each do |book| %>
+
+            <!--Book for mobile screen-->
+            <!--Disable in computer screen-->
+            <div class="col-sm-3 mobile-book">
+              <div class="xs-book-img" >
+                <%= image_tag(book.imgbook, class: "img-book img-thumbnail") %>
+              </div>
+
+              <div class="xs-book">
+                <%= link_to(book.title, {controller: "books", action: "show", :id => "#{book.id}"}, {class: "mobile-link-title book-title", method: "get"}) %>
+                <div class="book-price"><%= "$ " + book.price.to_s %></div>
+                <div class="xs-book-des"><%= simple_format(book.description.split[0...30].join(' ') + "...") %></div>
+                <div style="clear:both;"></div>
+              </div>
+            </div>
+
+
+            <!--Book for computer screen-->
+            <!--Disabled in mobile screen-->
+            <%= link_to("#", class:"book-modal", data: {toggle: "modal", target: "#myModal_#{book.id}"}) do %>
+                  <div style="border: solid 1px #ffffff">
+                  <div class="col-sm-3">
+                    <div class="xs-book-img" >
+                      <%= image_tag(book.imgbook, class: "img-book img-thumbnail") %>
+                    </div>
+                    <div class="xs-book">
+                      <div class="book-title" ><%= book.title %></div>
+                      <div class="book-price"><%= "$ " + book.price.to_s %></div>
+                    </div>
+
+                  </div>
+                </div>
+            <% end %>
+
+
+            <!-- Modal -->
+            <div class="modal fade" id="myModal_<%= book.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel"><%= book.title %></h4>
+                  </div>
+                  <div class="modal-body">
+                    <div class="modal-book-img" ><%= image_tag(book.imgbook, class: "img-book img-thumbnail") %></div>
+                    <div class="modal-book">
+                      <!--List all author of a book-->
+                      <% authors_of_book = book.authors %>
+                      <div class="modal-author">
+                        <% authors_of_book.each do |author|%>
+                            <%= link_to("#{author.name}", {controller: "authors", action: "show_author", :id => author.id}) %>
+                        <% end %>
+                      </div>
+                      <!--Price-->
+                      <div class="modal-price"><%= "$ " + book.price.to_s %></div>
+                      <!--List all category of book-->
+                      <% catetory_of_book = book.categories %>
+                      <div>
+                        <% catetory_of_book.each do |category| %>
+                            <%= link_to("#{category.category_title}", "#") %>
+                        <% end %>
+                      </div>
+                      <div class="modal-book-des"><%= raw(book.description.split[0...50].join(' ')) + "..." %></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" style="float: right; margin-left: 20px" data-dismiss="modal">Close</button>
+                    <%= link_to "View details", {controller: "books", action: "show", :id => book.id}, {class:"btn btn-primary", id:"view-details", method: "get"} %>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+        <% end %>
+
+        <div style="clear: both"></div>
+
+        </div>
+      </fieldset>
+    <% end %>
+
+
+
+  </div>
+</div>

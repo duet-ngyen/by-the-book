@@ -67,7 +67,7 @@
                               <% authors_of_book = book.authors %>
                               <div class="modal-author">
                                 <% authors_of_book.each do |author|%>
-                                  <%= link_to("#{author.name}", "author/#{author.id}") %>
+                                  <%= link_to("#{author.name}", {controller: "authors", action: "show_author", :id => author.id}) %>
                                 <% end %>
                               </div>
                               <!--Price-->

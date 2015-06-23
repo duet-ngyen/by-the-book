@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'categories/show_category'
+
+  get 'authors/show_author'
+
   get 'carts/show'
 
   get 'home/index'
@@ -13,9 +17,9 @@ Rails.application.routes.draw do
 
   get 'book/:id' => 'books#show'
 
-  get 'author/:id' => 'books#show'
+  get 'author/:id' => 'authors#show_author'
 
-  get 'category/:id' => 'books#show'
+  get 'category/:id' => 'categories#show_category'
 
 
   #for user sign up, sign in, sign out
