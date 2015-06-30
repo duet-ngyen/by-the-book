@@ -4,6 +4,13 @@ class Book < ActiveRecord::Base
 
   mount_uploader :imgbook, ImageUploader
 
+
+  def self.search(search)
+    where("title LIKE ?", "%#{search}%")
+  end
+
+
+
   def cart_action(current_user_id)
     if $redis.sismember "cart#{current_user_id}", id
       "Remove from"

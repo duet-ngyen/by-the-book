@@ -25,6 +25,10 @@ class BooksController < ApplicationController
 
   end
 
+  def search
+    @book = Book.search(params[:search])
+  end
+
   # def create
   #   @test = Book.create(book_params)
   # end

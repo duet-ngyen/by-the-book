@@ -7,20 +7,25 @@
         <%= image_tag("http://res.cloudinary.com/dtls0k5em/image/upload/v1435064855/home-cover_r55sae.jpg", alt: "home cover", class: "img-home img-rounded")%>
       </div>
     </div>
+
+
+
     <fieldset>
       <legend><h2 style="font: italic normal bold 32px/1.4em 'times new roman',times,serif; padding: 0; margin: 0; text-align: center">Shop</h2></legend>
+
+
       <div class="shop">
         <!--Show random 4 categories-->
         <% Category.limit(4).order("RANDOM()").each do |category| %>
             <% if category.books.count > 0 %>
 
-          <div class="category">
+          <div class="category" >
               <div class="category-title">
                 <%= category.category_title %>
               </div>
               <!--Show books for each category-->
               <% books_category = category.books.sort_by{rand}.slice(0,4) %>
-              <div style="width: 100%">
+              <div style="width: 100%" >
                 <% books_category.each do |book| %>
 
                     <!--Book for computer screen-->

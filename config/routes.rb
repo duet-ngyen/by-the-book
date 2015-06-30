@@ -17,6 +17,8 @@ Rails.application.routes.draw do
 
   get 'books/shop'
 
+  get 'books/search'
+
   root 'books#shop'
 
   get 'book/:id' => 'books#show'
