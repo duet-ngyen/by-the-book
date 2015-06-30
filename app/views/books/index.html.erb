@@ -1,0 +1,285 @@
+<% provide(:title, "| HOME") %>
+<div class="body-background">
+  <div class="body-content">
+
+    <!--Cover Img-->
+    <div class="home-cover">
+      <div class="home-cover-img">
+        <%= image_tag("http://res.cloudinary.com/dtls0k5em/image/upload/v1435064855/home-cover_r55sae.jpg", alt: "home cover", class: "img-home img-rounded")%>
+      </div>
+    </div>
+
+
+    <fieldset>
+      <legend><h2 style="font: italic normal bold 32px/1.4em 'times new roman',times,serif; padding: 0; margin: 0; text-align: center">The Book Shelf</h2></legend>
+
+      <div class="shop">
+        <div class="col-sm-4">
+          <h4>Best Seller</h4>
+          <% book_best = Book.find(1) %>
+          <!--Book for computer screen-->
+          <!--Disabled in mobile screen-->
+          <%= link_to("#", class:"book-modal", data: {toggle: "modal", target: "#myModal_#{book_best.id}"}) do %>
+          <div class="col-sm-12">
+            <div class="xs-book-img" style="width: 100%"><%= image_tag("#{book_best.imgbook}", class: "img-book img-thumbnail book-shelf") %></div>
+            <div class="xs-book">
+              <div class="book-title" ><%= book_best.title %></div>
+              <div class="book-price"><%= "$ " + book_best.price.to_s %></div>
+              <div class="xs-book-des"><%= book_best.description.split[0...50].join(' ') + "..." %></div>
+            </div>
+          </div>
+          <% end %>
+          <!--Book for mobile screen-->
+          <!--Disable in computer screen-->
+          <div class="col-sm-3 mobile-book">
+            <div class="xs-book-img" ><%= image_tag("#{book_best.imgbook}", class: "img-book img-thumbnail") %></div>
+            <div class="xs-book">
+              <%= link_to(book_best.title, {controller: "books", action: "show", :id => "#{book_best.id}"}, {class: "mobile-link-title book-title", method: "get"}) %>
+              <div class="book-price"><%= "$ " + book_best.price.to_s %></div>
+              <div class="xs-book-des"><%= simple_format(book_best.description.split[0...30].join(' ') + "...") %></div>
+              <div style="clear:both;"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-4">
+          <h4>New Title</h4>
+          <!--Book for computer screen-->
+          <!--Disabled in mobile screen-->
+          <% book_newtitle = Book.last %>
+          <%= link_to("#", class:"book-modal", data: {toggle: "modal", target: "#myModal_#{book_newtitle.id}"}) do %>
+          <div class="col-sm-12">
+            <div class="xs-book-img" style="width: 100%"><%= image_tag("#{book_newtitle.imgbook}", class: "img-book img-thumbnail book-shelf") %></div>
+            <div class="xs-book">
+              <div class="book-title" ><%= book_newtitle.title %></div>
+              <div class="book-price"><%= "$ " + book_newtitle.price.to_s %></div>
+              <div class="xs-book-des"><%= book_newtitle.description.split[0...50].join(' ') + "..." %></div>
+            </div>
+          </div>
+          <% end %>
+
+          <!--Book for mobile screen-->
+          <!--Disable in computer screen-->
+          <div class="col-sm-3 mobile-book">
+            <div class="xs-book-img" ><%= image_tag("#{book_newtitle.imgbook}", class: "img-book img-thumbnail") %></div>
+            <div class="xs-book">
+              <%= link_to(book_newtitle.title, {controller: "books", action: "show", :id => "#{book_newtitle.id}"}, {class: "mobile-link-title book-title", method: "get"}) %>
+              <div class="book-price"><%= "$ " + book_newtitle.price.to_s %></div>
+              <div class="xs-book-des"><%= simple_format(book_newtitle.description.split[0...30].join(' ') + "...") %></div>
+              <div style="clear:both;"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-4">
+          <h4>StaffPick</h4>
+          <!--Book for computer screen-->
+          <!--Disabled in mobile screen-->
+          <% book_staff = Book.find(3) %>
+          <%= link_to("#", class:"book-modal", data: {toggle: "modal", target: "#myModal_#{book_staff.id}"}) do %>
+          <div class="col-sm-12">
+            <div class="xs-book-img" style="width: 100%"><%= image_tag("#{book_staff.imgbook}", class: "img-book img-thumbnail book-shelf") %></div>
+            <div class="xs-book">
+              <div class="book-title" ><%= book_staff.title %></div>
+              <div class="book-price"><%= "$ " + book_staff.price.to_s %></div>
+              <div class="xs-book-des"><%= book_staff.description.split[0...50].join(' ') + "..." %></div>
+            </div>
+          </div>
+          <% end %>
+
+
+          <!--Book for mobile screen-->
+          <!--Disable in computer screen-->
+          <div class="col-sm-3 mobile-book">
+            <div class="xs-book-img" ><%= image_tag("#{book_staff.imgbook}", class: "img-book img-thumbnail") %></div>
+            <div class="xs-book">
+              <%= link_to(book_staff.title, {controller: "books", action: "show", :id => "#{book_staff.id}"}, {class: "mobile-link-title book-title", method: "get"}) %>
+              <div class="book-price"><%= "$ " + book_staff.price.to_s %></div>
+              <div class="xs-book-des"><%= simple_format(book_staff.description.split[0...30].join(' ') + "...") %></div>
+              <div style="clear:both;"></div>
+            </div>
+          </div>
+
+        </div>
+        <div style="clear:both;"> </div>
+      </div>
+
+      <button class="btn btn-default col-sm-6 col-sm-offset-3 col-xs-12"
+              style="margin-top: 20px; color: #90B4CA; background-color: #ffffff !important;">Go to shop</button>
+
+    </fieldset> <!--End of book shelf-->
+<div>
+
+    <fieldset class="col-md-7">
+      <legend><h2 style="font: italic normal bold 32px/1.4em 'times new roman',times,serif; padding: 0; margin: 0; text-align: center">Book of the Month</h2></legend>
+      <% book_of_month = Book.find(2) %>
+      <div class="shop">
+        <div style="padding: 10px">
+          <div class=" col-md-8 col-sm-8 col-xs-12" style="text-align: left !important;">
+            <h4><%= book_of_month.title %></h4>
+            <p><%= simple_format(book_of_month.description.split[0...50].join(' ')) %></p>
+          </div>
+          <div class=" col-md-4 col-sm-4 avata-author">
+            <%= image_tag("#{ book_of_month.imgbook}", class: "img-book img-thumbnail img-book-month") %>
+          </div>
+          <div style="clear: both"></div>
+        </div>
+      </div>
+
+    </fieldset>
+
+    <fieldset class="col-md-4">
+      <legend><h2 style="font: italic normal bold 32px/1.4em 'times new roman',times,serif; padding: 0; margin: 0; text-align: center">Typical Author</h2></legend>
+        <% author_typical = Author.find(1) %>
+      <div class="shop">
+        <div class="author-mobile" style="padding:15px 15px 0px 15px">
+          <div class="col-md-12 col-sm-5 avata-author" >
+            <%= image_tag("#{author_typical.avatar}", class: "img-thumbnail typical-author") %>
+          </div>
+
+          <div class="col-md-12 col-sm-7" style="text-align: left !important;">
+            <h4 style="text-align: center;   "><%= author_typical.name %></h4>
+            <div class="about-author-typical">
+              <%= simple_format(author_typical.about.split[0...50].join(' ')) %>
+            </div>
+          </div>
+        </div>
+        <div style="clear: both; height: 9px"></div>
+
+      </div>
+    </fieldset>
+
+</div>
+  </div>
+
+      <div style="clear: both"></div>
+
+
+
+
+
+      <!-- Modal for new title-->
+    <div class="modal fade" id="myModal_<%= book_newtitle.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel"><%= book_newtitle.title %></h4>
+          </div>
+          <div class="modal-body">
+            <div class="modal-book-img" ><%= image_tag("#{book_newtitle.imgbook}", class: "img-book img-thumbnail") %></div>
+            <div class="modal-book">
+              <!--List all author of a book-->
+              <% authors_of_book = book_newtitle.authors %>
+              <div class="modal-author">
+                <% authors_of_book.each do |author|%>
+                    <%= link_to("#{author.name}", {controller: "authors", action: "show_author", :id => author.id}) %>
+                <% end %>
+              </div>
+              <!--Price-->
+              <div class="modal-price"><%= "$ " + book_newtitle.price.to_s %></div>
+              <!--List all category of book-->
+              <% catetory_of_book = book_newtitle.categories %>
+              <div>
+                <% catetory_of_book.each do |category| %>
+                    <%= link_to("#{category.category_title}", "category/#{category.id}") %>
+                <% end %>
+              </div>
+
+              <div class="modal-book-des"><%= raw(book_newtitle.description.split[0...50].join(' ')) + "..." %></div>
+            </div>
+            <div style="clear:both;"></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" style="float: right; margin-left: 20px" data-dismiss="modal">Close</button>
+            <%= link_to "View details", {controller: "books", action: "show", :id => "#{book_newtitle.id}"}, {class:"btn btn-primary", id:"view-details", method: "get"} %>
+          </div>
+        </div>
+      </div>
+    </div> <!--/Modal for new title-->
+
+    <!-- Modal for book_best-->
+    <div class="modal fade" id="myModal_<%= book_best.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel"><%= book_best.title %></h4>
+          </div>
+          <div class="modal-body">
+            <div class="modal-book-img" ><%= image_tag("#{book_best.imgbook}", class: "img-book img-thumbnail") %></div>
+            <div class="modal-book">
+              <!--List all author of a book-->
+              <% authors_of_book = book_best.authors %>
+              <div class="modal-author">
+                <% authors_of_book.each do |author|%>
+                    <%= link_to("#{author.name}", {controller: "authors", action: "show_author", :id => author.id}) %>
+                <% end %>
+              </div>
+              <!--Price-->
+              <div class="modal-price"><%= "$ " + book_best.price.to_s %></div>
+              <!--List all category of book-->
+              <% catetory_of_book = book_best.categories %>
+              <div>
+                <% catetory_of_book.each do |category| %>
+                    <%= link_to("#{category.category_title}", "category/#{category.id}") %>
+                <% end %>
+              </div>
+
+
+              <div class="modal-book-des"><%= raw(book_best.description.split[0...50].join(' ')) + "..." %></div>
+            </div>
+            <div style="clear:both;"></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" style="float: right; margin-left: 20px" data-dismiss="modal">Close</button>
+            <%= link_to "View details", {controller: "books", action: "show", :id => "#{book_best.id}"}, {class:"btn btn-primary", id:"view-details", method: "get"} %>
+          </div>
+        </div>
+      </div>
+    </div> <!--/Modal for new title-->
+
+
+    <!-- Modal for staff pick-->
+    <div class="modal fade" id="myModal_<%= book_staff.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel"><%= book_staff.title %></h4>
+          </div>
+          <div class="modal-body">
+            <div class="modal-book-img" ><%= image_tag("#{book_staff.imgbook}", class: "img-book img-thumbnail") %></div>
+            <div class="modal-book">
+              <!--List all author of a book-->
+              <% authors_of_book = book_staff.authors %>
+              <div class="modal-author">
+                <% authors_of_book.each do |author|%>
+                    <%= link_to("#{author.name}", {controller: "authors", action: "show_author", :id => author.id}) %>
+                <% end %>
+              </div>
+              <!--Price-->
+              <div class="modal-price"><%= "$ " + book_staff.price.to_s %></div>
+              <!--List all category of book-->
+              <% catetory_of_book = book_staff.categories %>
+              <div>
+                <% catetory_of_book.each do |category| %>
+                    <%= link_to("#{category.category_title}", "category/#{category.id}") %>
+                <% end %>
+              </div>
+
+
+              <div class="modal-book-des"><%= raw(book_staff.description.split[0...50].join(' ')) + "..." %></div>
+            </div>
+            <div style="clear:both;"></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" style="float: right; margin-left: 20px" data-dismiss="modal">Close</button>
+            <%= link_to "View details", {controller: "books", action: "show", :id => "#{book_staff.id}"}, {class:"btn btn-primary", id:"view-details", method: "get"} %>
+          </div>
+        </div>
+      </div>
+    </div> <!--/Modal for staff pick-->
+
+  </div>
+</div>

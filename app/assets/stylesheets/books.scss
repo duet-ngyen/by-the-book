@@ -55,7 +55,22 @@
   }
 
 
+
 }
+
+@media screen and (min-width: 992px) {
+  .about-author-typical {
+    visibility: hidden;
+    clear: both;
+    float: left;
+    margin: 10px auto 5px 20px;
+    width: 28%;
+    display: none;
+
+  }
+}
+
+
 
 /* mobile divice*/
 @media screen and (max-width: 768px) {
@@ -106,6 +121,13 @@
   .body-content {
     width: 100%;
   }
+  
+  .avata-author {
+    width: 80%;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
 }
 
 //tablet
@@ -256,5 +278,16 @@ legend {
 }
 .morelink {
   display: block;
+}
+
+
+.img-book-month {
+  text-align: right !important;
+  margin-right: 0;
+  padding-right: 0;
+  width: 100%;
+}
+.book-shelf {
+  width: 100%;
 }
 
