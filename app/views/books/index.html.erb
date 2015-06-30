@@ -128,7 +128,7 @@
               <%= simple_format(book_of_month.description.split[0...50].join(' ')) %>
               </div>
           </div>
-          <div class=" col-md-4 col-sm-4 avata-author">
+          <div class=" col-md-4 col-sm-4 ">
             <%= image_tag("#{ book_of_month.imgbook}", class: "img-book img-thumbnail img-book-month") %>
           </div>
           <div style="clear: both"></div>
@@ -142,8 +142,8 @@
         <% author_typical = Author.find(1) %>
       <div class="shop">
         <div class="author-mobile" style="padding:15px 15px 0px 15px">
-          <div class="col-md-12 col-sm-5 col-xs-12 avatar-author" >
-            <%= image_tag("#{author_typical.avatar}", class: "img-thumbnail typical-author") %>
+          <div class="col-md-12 col-sm-5 col-xs-12" >
+            <%= image_tag("#{author_typical.avatar}", class: "img-book img-thumbnail typical-author") %>
           </div>
 
           <div class="col-md-12 col-sm-7 col-xs-12" style="text-align: left !important;">
