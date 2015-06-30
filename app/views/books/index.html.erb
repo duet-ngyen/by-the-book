@@ -5,7 +5,7 @@
     <!--Cover Img-->
     <div class="home-cover">
       <div class="home-cover-img">
-        <%= image_tag("http://res.cloudinary.com/dtls0k5em/image/upload/v1435064855/home-cover_r55sae.jpg", alt: "home cover", class: "img-home img-rounded")%>
+        <%= image_tag("http://4.bp.blogspot.com/-XgXZPb19dDY/U_ubncRprBI/AAAAAAAADOM/XhVpSCtjBOA/s959/dbt20142.jpg", alt: "home cover", class: "img-home img-rounded")%>
       </div>
     </div>
 
@@ -14,8 +14,8 @@
       <legend><h2 style="font: italic normal bold 32px/1.4em 'times new roman',times,serif; padding: 0; margin: 0; text-align: center">The Book Shelf</h2></legend>
 
       <div class="shop">
-        <div class="col-sm-4">
-          <h4>Best Seller</h4>
+        <div class="col-sm-4 right-border">
+          <h4 class="title-book-shelf">Best Seller</h4>
           <% book_best = Book.find(1) %>
           <!--Book for computer screen-->
           <!--Disabled in mobile screen-->
@@ -39,11 +39,14 @@
               <div class="xs-book-des"><%= simple_format(book_best.description.split[0...30].join(' ') + "...") %></div>
               <div style="clear:both;"></div>
             </div>
+            <span style="clear:both;" class="col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2"><hr></span>
+            <div style="clear: both"></div>
           </div>
         </div>
 
-        <div class="col-sm-4">
-          <h4>New Title</h4>
+
+        <div class="col-sm-4 right-border">
+          <h4 class="title-book-shelf">New Title</h4>
           <!--Book for computer screen-->
           <!--Disabled in mobile screen-->
           <% book_newtitle = Book.last %>
@@ -68,11 +71,14 @@
               <div class="xs-book-des"><%= simple_format(book_newtitle.description.split[0...30].join(' ') + "...") %></div>
               <div style="clear:both;"></div>
             </div>
+            <span style="clear:both;" class="col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2"><hr></span>
           </div>
+
+          <div style="clear: both"></div>
         </div>
 
         <div class="col-sm-4">
-          <h4>StaffPick</h4>
+          <h4 class="title-book-shelf">Staff Pick</h4>
           <!--Book for computer screen-->
           <!--Disabled in mobile screen-->
           <% book_staff = Book.find(3) %>
@@ -84,6 +90,7 @@
               <div class="book-price"><%= "$ " + book_staff.price.to_s %></div>
               <div class="xs-book-des"><%= book_staff.description.split[0...50].join(' ') + "..." %></div>
             </div>
+
           </div>
           <% end %>
 
@@ -99,13 +106,12 @@
               <div style="clear:both;"></div>
             </div>
           </div>
-
         </div>
-        <div style="clear:both;"> </div>
+        <div style="clear:both; height: 20px"> </div>
       </div>
 
-      <button class="btn btn-default col-sm-6 col-sm-offset-3 col-xs-12"
-              style="margin-top: 20px; color: #90B4CA; background-color: #ffffff !important;">Go to shop</button>
+      <%= link_to("Go to Shop", {controller: 'books', action: 'shop'},
+                  {class:"btn btn-default col-sm-6 col-sm-offset-3 col-xs-12 go-shop", method: 'get'}) %>
 
     </fieldset> <!--End of book shelf-->
 <div>
@@ -115,9 +121,12 @@
       <% book_of_month = Book.find(2) %>
       <div class="shop">
         <div style="padding: 10px">
-          <div class=" col-md-8 col-sm-8 col-xs-12" style="text-align: left !important;">
-            <h4><%= book_of_month.title %></h4>
-            <p><%= simple_format(book_of_month.description.split[0...50].join(' ')) %></p>
+          <div class=" col-md-8 col-sm-8 col-xs-12" style="text-align: left !important;
+                  font-family: 'Ubuntu', serif;">
+            <h4><%=link_to("#{book_of_month.title}", {controller: 'books', action: 'show', :id => book_of_month.id}, {method: 'get'})  %></h4>
+            <div style="font-family: 'Tangerine', serif !important; font-size: 1.4em">
+              <%= simple_format(book_of_month.description.split[0...50].join(' ')) %>
+              </div>
           </div>
           <div class=" col-md-4 col-sm-4 avata-author">
             <%= image_tag("#{ book_of_month.imgbook}", class: "img-book img-thumbnail img-book-month") %>
@@ -138,13 +147,14 @@
           </div>
 
           <div class="col-md-12 col-sm-7" style="text-align: left !important;">
-            <h4 style="text-align: center;   "><%= author_typical.name %></h4>
+            <h4 style="text-align: center; font-family: 'Tangerine', serif;font-size: 1.9em"><%= link_to("#{author_typical.name}",
+                                               {controller: "authors", action: "show_author", :id => author_typical.id}, {method: 'get'})%></h4>
             <div class="about-author-typical">
               <%= simple_format(author_typical.about.split[0...50].join(' ')) %>
             </div>
           </div>
         </div>
-        <div style="clear: both; height: 9px"></div>
+        <div style="clear: both;"></div>
 
       </div>
     </fieldset>

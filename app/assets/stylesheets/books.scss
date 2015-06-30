@@ -16,15 +16,14 @@
   .solugan {
     text-align: center;
     position: relative;
-    max-width: 500px;
+    max-width: 450px;
     top: 8px;
     width: auto;
-    font-size: 4em;
+    font-size: 4.5em;
     margin-right: auto;
     margin-left: auto;
     background-color: #ffffff;
-    text-transform: uppercase;
-    font-family: cursive;
+    font-family: 'Tangerine';
   }
 
   .xs-book-des {
@@ -70,22 +69,25 @@
   }
 }
 
-
+.about-author-typical {
+  font-family: 'Tangerine', serif;
+  font-size: 1.5em;
+}
 
 /* mobile divice*/
 @media screen and (max-width: 768px) {
   .solugan {
     text-align: center;
     position: relative;
-    max-width: 350px;
+    max-width: 300px;
     top: 15px;
     width: auto;
-    font-size: 2.5em;
+    font-size: 3.5em;
     margin-right: auto;
     margin-left: auto;
     background-color: #ffffff;
-    text-transform: uppercase;
-    font-family: cursive;
+
+    font-family: 'Tangerine' !important;
   }
 
   .book-of-month{
@@ -258,10 +260,13 @@ legend {
 
 .book-title {
   font-weight: bold;
+  font-family: 'Ubuntu';
+  margin-top: 5px;
 }
 
 .book-price {
   font-weight: bold;
+  font-family: 'Ubuntu';
   color: red;
 }
 
@@ -291,3 +296,32 @@ legend {
   width: 100%;
 }
 
+
+.right-border {
+  border-right: solid 1px #90B4CA;
+}
+
+.white-text {
+  color: #ffffff;
+}
+
+hr{
+  border: 0; border-top: 1px solid #90B4CA !important;
+}
+
+.title-book-shelf {
+  font-family: 'Lato';
+  font-size: 1.8em;
+  font-weight: bold;
+  padding-top: 20px;
+  margin-bottom: 15px;
+  color: #676767;
+}
+
+.go-shop {
+  margin-top: 20px;
+  color: #676767 !important;
+  font-weight: bold;
+  font-family:'Ubuntu' !important;
+  font-size: 1.8em !important;
+}

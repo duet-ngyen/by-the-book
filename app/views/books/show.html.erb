@@ -10,13 +10,15 @@
           <h5 style="margin-top: 0; padding-top: 0">
           <!--Show all authors, if the last author, remove character ;-->
           <% author_book = @author.ids  %>
-          <%= 'by ' %>
+          <span class="white-text"><%= 'by ' %></span>
           <% author_book.each do |author_id| %>
               <% if author_id == author_book.count + author_book.first - 1 %>
-                <%= Author.find_by(id:author_id).name %>
+                <%= link_to("#{Author.find_by(id:author_id).name}", {controller: 'authors', action: 'show_author', :id => author_id},
+                    {method: 'get', class: "white-text"})  %>
               <% else %>
-                <%= Author.find_by(id:author_id).name %>
-                <%= ';' %>&nbsp;
+                    <%= link_to("#{Author.find_by(id:author_id).name}", {controller: 'authors', action: 'show_author', :id => author_id},
+                                {method: 'get', class: "white-text"})  %>
+              <span class="white-text"><%= ';' %>&nbsp;</span>
               <% end %>
 
           <% end %>
@@ -42,7 +44,7 @@
             </div>
 
             <!--Right: Details-->
-            <div class="col-sm-8">
+            <div class="col-sm-8 col-xs-12">
               <table>
                 <tr >
                   <td style=""><strong>Publisher:</strong></td>
