@@ -2,7 +2,7 @@
 <div class="body-background">
   <div class="body-content">
 
-    <fieldset style="text-align: left !important;">
+    <fieldset style="text-align: left !important;" class="book-legend-show">
 
       <legend style="text-align: left !important;"><h3><%= @book.title %></h3></legend>
       <!--Authors of book-->
@@ -27,20 +27,16 @@
           <!--Book Infos-->
           <div style="padding: 20px">
             <!--Left: img and price-->
-            <div style="margin-right: 20px; text-align: center" class="col-sm-3 col-xs-12">
-              <%= image_tag("#{@book.imgbook}",class: "img-book img-thumbnail") %>
-              <div>
-                <%= @book.price %>
+            <div style="margin-right: 20px; text-align: center; margin-bottom: 5px" class="col-sm-3 col-xs-12">
+              <%= image_tag("#{@book.imgbook}",class: "img-book img-thumbnail show-img-book") %>
+              <!--Button Add to cart-->
+              <% if current_user %>
+                  <%= link_to "", class: "btn btn-primary col-xs-12", data: {target: @cart_action,
+                                                                            addUrl: add_to_cart_path(@book), removeUrL: remove_from_cart_path(@book)} do %>
+                      <span><%= @cart_action %></span> Cart
+                  <% end %>
+              <% end %>
 
-                <!--Button Add to cart-->
-                <% if current_user %>
-                    <%= link_to "", class: "btn btn-primary", data: {target: @cart_action,
-                                                                     addUrl: add_to_cart_path(@book), removeUrL: remove_from_cart_path(@book)} do %>
-                        <span><%= @cart_action %></span> Cart
-                    <% end %>
-                <% end %>
-
-              </div>
             </div>
 
             <!--Right: Details-->
@@ -49,6 +45,10 @@
                 <tr >
                   <td style=""><strong>Publisher:</strong></td>
                   <td><%= @book.publisher %>; <%= @book.year %></td>
+                </tr>
+                <tr>
+                  <td><strong>Price:</strong></td>
+                  <td> $ <%= @book.price %>  </td>
                 </tr>
                 <tr>
                   <td><strong>ISBN:</strong></td>
@@ -144,7 +144,7 @@
       <% if arr_book_the_same_category.count > 0 %>
 
         <fieldset style="text-align: left !important">
-          <legend style="text-align: left !important;">
+          <legend style="text-align: left !important;" class="book-legend-show">
             <h3> More in:
               <% category_book.each do |category_id| %>
                   <% if category_id == category_book.count + category_book.first - 1 %>
@@ -172,7 +172,7 @@
                       </div>
                       <div class="xs-book">
                         <%= link_to(Book.find(book_same_category).title, {controller: "books", action: "show", :id => "#{Book.find(book_same_category).id}"}, {class: "mobile-link-title book-title", method: "get"}) %>
-                        <div>
+                        <div class="guide-info">
                             <% category_book.each do |category_id| %>
                                 <% if category_id == category_book.count + category_book.first - 1 %>
                                     <%= Category.find_by(id:category_id).category_title %>
@@ -198,11 +198,11 @@
                         </div>
                         <div class="xs-book">
                           <div class="book-title" ><%= Book.find(book_same_category).title %></div>
-                          <div>
-                            <% category_book_relate = Book.find(book_same_category).categories.ids %>
+                          <div class="guide-info">
+                            <% category_book = Book.find(book_same_category).categories.ids %>
                             -
-                            <% category_book_relate.each do |category_id| %>
-                                <% if category_id == category_book_relate.count + category_book_relate.first - 1 %>
+                            <% category_book.each do |category_id| %>
+                                <% if category_id == category_book.count + category_book.first - 1 %>
                                     <%= Category.find_by(id:category_id).category_title %>
                                 <% else %>
                                     <%= Category.find_by(id:category_id).category_title %>
@@ -283,7 +283,7 @@
 
       <% if arr_book_the_same_author.count > 0 %>
       <fieldset style="text-align: left !important;">
-        <legend style="text-align: left !important;">
+        <legend style="text-align: left !important;" class="book-legend-show">
           <h3>More by:
             <% author_book.each do |author_id| %>
                 <% if author_id == author_book.count + author_book.first - 1 %>
@@ -310,7 +310,7 @@
                     <%= link_to(Book.find(book_same_author).title,
                                 {controller: "books", action: "show", :id => "#{Book.find(book_same_author).id}"},
                                 {class: "mobile-link-title book-title", method: "get"}) %>
-                    <div>
+                    <div class="guide-info">
                       <% author_book_relate = Book.find(book_same_author).authors.ids %>
                       by
                       <% author_book_relate.each do |author_id| %>
@@ -338,7 +338,7 @@
               <div class="xs-book-img" ><%= image_tag("#{Book.find(book_same_author).imgbook}", class: "img-book img-thumbnail") %></div>
               <div class="xs-book">
                 <div class="book-title" ><%= Book.find(book_same_author).title %></div>
-                <div>
+                <div class="guide-info">
                   <% author_book_relate = Book.find(book_same_author).authors.ids %>
                   by
                   <% author_book_relate.each do |author_id| %>

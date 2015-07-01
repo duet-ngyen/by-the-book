@@ -1,10 +1,14 @@
 <% provide(:title, "| AUTHOR | #{@author.name.upcase}") %>
 <div class="body-background">
   <div class="body-content">
-    <fieldset style="text-align: left !important;">
+    <fieldset style="text-align: left !important;" class="book-legend-show">
       <legend style="text-align: left !important;"><h3><%= @author.name %></h3></legend>
+      <div class="shop">
+
+      <div style="padding-top: 10px; padding-bottom: 10px">
+
       <div class="col-sm-4 col-xs-12" style="text-align: center">
-        <%= image_tag(@author.avatar_url, class: "avatar-author") %>
+        <%= image_tag(@author.avatar_url, class: "img-thumbnail") %>
       </div>
       <div class="col-sm-8">
         <table>
@@ -64,11 +68,14 @@
             });
         </script>
       </div>
+        <div style="clear: both"></div>
+      </div>
+      </div> <!--/div class Shop-->
     </fieldset>
 
     <% all_book_of_author = @author.books %>
     <% if all_book_of_author.count > 0 %>
-      <fieldset style="text-align: left !important;">
+      <fieldset style="text-align: left !important;" class="book-legend-show">
         <legend style="text-align: left !important;"><h3>Books by <%= @author.name %></h3></legend>
 
         <div class="shop" style = "padding-top: 20px; padding-bottom: 20px">

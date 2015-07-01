@@ -14,7 +14,7 @@
       <legend><h2 style="font: italic normal bold 32px/1.4em 'times new roman',times,serif; padding: 0; margin: 0; text-align: center">The Book Shelf</h2></legend>
 
       <div class="shop">
-        <div class="col-sm-4 right-border">
+        <div class="col-sm-4">
           <h4 class="title-book-shelf">Best Seller</h4>
           <% book_best = Book.find(1) %>
           <!--Book for computer screen-->
@@ -42,10 +42,11 @@
             <span style="clear:both;" class="col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2"><hr></span>
             <div style="clear: both"></div>
           </div>
+
         </div>
 
 
-        <div class="col-sm-4 right-border">
+        <div class="col-sm-4">
           <h4 class="title-book-shelf">New Title</h4>
           <!--Book for computer screen-->
           <!--Disabled in mobile screen-->
@@ -114,59 +115,55 @@
                   {class:"btn btn-default col-sm-6 col-sm-offset-3 col-xs-12 go-shop", method: 'get'}) %>
 
     </fieldset> <!--End of book shelf-->
-<div>
+    <div>
 
-    <fieldset class="col-md-7">
-      <legend><h2 style="font: italic normal bold 32px/1.4em 'times new roman',times,serif; padding: 0; margin: 0; text-align: center">Book of the Month</h2></legend>
-      <% book_of_month = Book.find(2) %>
-      <div class="shop">
-        <div style="padding: 10px">
-          <div class=" col-md-8 col-sm-8 col-xs-12" style="text-align: left !important;
-                  font-family: 'Ubuntu', serif;">
-            <h4><%=link_to("#{book_of_month.title}", {controller: 'books', action: 'show', :id => book_of_month.id}, {method: 'get'})  %></h4>
-            <div style="font-family: 'Tangerine', serif !important; font-size: 1.4em">
-              <%= simple_format(book_of_month.description.split[0...50].join(' ')) %>
+        <fieldset class="col-md-7">
+          <legend><h2 style="font: italic normal bold 32px/1.4em 'times new roman',times,serif; padding: 0; margin: 0; text-align: center">Book of the Month</h2></legend>
+          <% book_of_month = Book.find(2) %>
+          <div class="shop">
+            <div style="padding: 10px">
+              <div class=" col-md-8 col-sm-8 col-xs-12" style="text-align: left !important;
+                      font-family: 'Ubuntu', serif;">
+                <h4><%=link_to("#{book_of_month.title}", {controller: 'books', action: 'show', :id => book_of_month.id}, {method: 'get'})  %></h4>
+                <div style="font-family: 'Tangerine', serif !important; font-size: 1.4em">
+                  <%= simple_format(book_of_month.description.split[0...50].join(' ')) %>
+                  </div>
               </div>
-          </div>
-          <div class=" col-md-4 col-sm-4 ">
-            <%= image_tag("#{ book_of_month.imgbook}", class: "img-book img-thumbnail img-book-month") %>
-          </div>
-          <div style="clear: both"></div>
-        </div>
-      </div>
-
-    </fieldset>
-
-    <fieldset class="col-md-4">
-      <legend><h2 style="font: italic normal bold 32px/1.4em 'times new roman',times,serif; padding: 0; margin: 0; text-align: center">Typical Author</h2></legend>
-        <% author_typical = Author.find(1) %>
-      <div class="shop">
-        <div class="author-mobile" style="padding:15px 15px 0px 15px">
-          <div class="col-md-12 col-sm-5 col-xs-12" >
-            <%= image_tag("#{author_typical.avatar}", class: "img-book img-thumbnail typical-author") %>
-          </div>
-
-          <div class="col-md-12 col-sm-7 col-xs-12" style="text-align: left !important;">
-            <h4 style="text-align: center; font-family: 'Tangerine', serif;font-size: 1.9em"><%= link_to("#{author_typical.name}",
-                                               {controller: "authors", action: "show_author", :id => author_typical.id}, {method: 'get'})%></h4>
-            <div class="about-author-typical">
-              <%= simple_format(author_typical.about.split[0...50].join(' ')) %>
+              <div class=" col-md-4 col-sm-4 ">
+                <%= image_tag("#{ book_of_month.imgbook}", class: "img-book img-thumbnail img-book-month") %>
+              </div>
+              <div style="clear: both"></div>
             </div>
           </div>
-        </div>
-        <div style="clear: both;"></div>
 
-      </div>
-    </fieldset>
+        </fieldset>
 
-</div>
+        <fieldset class="col-md-4">
+          <legend><h2 style="font: italic normal bold 32px/1.4em 'times new roman',times,serif; padding: 0; margin: 0; text-align: center">Typical Author</h2></legend>
+            <% author_typical = Author.find(1) %>
+          <div class="shop">
+            <div class="author-mobile" style="padding:15px 15px 0px 15px">
+              <div class="col-md-12 col-sm-5 col-xs-12" >
+                <%= image_tag("#{author_typical.avatar}", class: "img-book img-thumbnail typical-author") %>
+              </div>
+
+              <div class="col-md-12 col-sm-7 col-xs-12" style="text-align: left !important;">
+                <h4 style="text-align: center; font-family: 'Tangerine', serif;font-size: 1.9em"><%= link_to("#{author_typical.name}",
+                                                   {controller: "authors", action: "show_author", :id => author_typical.id}, {method: 'get'})%></h4>
+                <div class="about-author-typical">
+                  <%= simple_format(author_typical.about.split[0...50].join(' ')) %>
+                </div>
+              </div>
+            </div>
+            <div style="clear: both;"></div>
+
+          </div>
+        </fieldset>
+      <div style="clear: both; height: 5px"></div>
+    </div>
   </div>
 
-      <div style="clear: both"></div>
-
-
-
-
+  <div style="clear: both"></div>
 
       <!-- Modal for new title-->
     <div class="modal fade" id="myModal_<%= book_newtitle.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

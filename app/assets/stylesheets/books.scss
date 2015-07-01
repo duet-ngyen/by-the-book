@@ -3,8 +3,6 @@
     display: inline-block;
     float: none;
     vertical-align: top;
-    font-family: 'Arial Narrow', Arial, sans-serif;
-    text-transform: uppercase;
   }
 
   .navbar .navbar-collapse {
@@ -52,7 +50,14 @@
     display: none;
   }
 
-
+  .new-mobile {
+    visibility: hidden;
+    clear: both;
+    float: left;
+    margin: 10px auto 5px 20px;
+    width: 28%;
+    display: none;
+  }
 
 }
 
@@ -64,7 +69,13 @@
     margin: 10px auto 5px 20px;
     width: 28%;
     display: none;
+  }
+}
 
+@media screen and (max-width: 992px) {
+  .typical-author {
+    width: 100%;
+    margin-bottom: 10px;
   }
 }
 
@@ -122,6 +133,15 @@
   .body-content {
     width: 100%;
   }
+
+  .new-computer {
+    visibility: hidden;
+    clear: both;
+    float: left;
+    margin: 10px auto 5px 20px;
+    width: 28%;
+    display: none;
+  }
   
 
 }
@@ -150,6 +170,16 @@
   }
 }
 
+.navbar .navbar-nav {
+  font-family: 'Arial Narrow', Arial, sans-serif;
+
+}
+
+.brand {
+  font-family: 'Arial Narrow', Arial, sans-serif;
+  font-size: 1.2em;
+}
+
 .mobile-book {
   margin-bottom: 20px;
 }
@@ -172,7 +202,6 @@
   max-width: 980px;
   margin-left: auto;
   margin-right: auto;
-
 }
 
 .home-cover {
@@ -265,7 +294,8 @@ legend {
 }
 
 .xs-book-des {
-  font-style: italic;
+
+  font-family: 'Arial Narrow';
 }
 
 .fleft {
@@ -288,11 +318,6 @@ legend {
 }
 .book-shelf {
   width: 100%;
-}
-
-
-.right-border {
-  border-right: solid 1px #90B4CA;
 }
 
 .white-text {
@@ -322,4 +347,46 @@ hr{
 
 .typical-author {
   width: 100%;
+}
+
+.show-img-book {
+  margin-bottom: 10px;
+}
+
+.table-info-book {
+  font-family: 'Josefin Slab';
+}
+
+.more {
+  font-family: 'Josefin Slab' !important;
+}
+
+.book-legend-show {
+  font-family: 'Ubuntu' !important;
+}
+
+.guide-info {
+  font-family: 'Josefin Slab' !important;
+}
+
+//update css for modal
+
+.modal-title {
+  font-family: 'Ubuntu';
+}
+
+.modal-body{
+  font-family: 'Ubuntu';
+}
+
+.modal-book-des {
+  font-family: 'Josefin Slab';
+}
+
+.modal-price {
+  color: red;
+}
+
+.modal-footer {
+  font-family: 'Ubuntu';
 }

@@ -10,9 +10,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a href="#" class="navbar-brand " >
-          All books
-        </a>
+        <%= link_to("By The Books", root_path, {class: "navbar-brand brand"}) %>
       </div>
       <!-- Collection of nav links and other content for toggling -->
       <div id="navbarCollapse" class="collapse navbar-collapse">
@@ -85,7 +83,7 @@
   <div class="navbar-center" style="margin-top: 30px">
     <div class="row" style="margin: 0; padding: 0">
       <!--New to by the book-->
-      <div class="col-sm-3" >
+      <div class="col-sm-3 new-computer" >
         <a href="#">
         <div class="btn btn-default" style="width: 100%; font-weight: bold; font-family: Arial Narrow, Arial, sans-serif ">
           New to by the book?
@@ -95,7 +93,7 @@
 
       <!--Search-->
       <%= form_tag books_search_path, :method => 'get' do %>
-          <div class="col-sm-6" style="">
+          <div class="col-sm-6" style="margin-bottom: 20px ">
             <div class="input-group" style="font-family: Arial Narrow, Arial, sans-serif">
               <%= text_field_tag :search, params[:search], class:"form-control", placeholder:"Search by title, publisher, ISBN" %>
             <span class="input-group-btn">
@@ -107,13 +105,16 @@
           </div><!-- /.col-lg-6 /Search -->
       <% end %>
 
+
+
+
       <!--List all category-->
-      <div class="col-sm-3">
+      <div class="col-sm-3 col-xs-5">
         <!-- Single button -->
         <div class="btn-group" style="width: 100%; font-weight: bold ;font-family: Arial Narrow, Arial, sans-serif ">
 
-          <button type="button" class="btn btn-default col-sm-10" style="font-weight: bold;">All categories</button>
-          <button type="button" class="btn btn-default dropdown-toggle col-sm-2"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <button type="button" class="btn btn-default col-xs-10" style="font-weight: bold;">All categories</button>
+          <button type="button" class="btn btn-default dropdown-toggle col-xs-2"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <span class="caret"></span>
             <span class="sr-only">Toggle Dropdown</span>
           </button>
@@ -129,6 +130,15 @@
 
         </div>
       </div> <!--/List all category-->
+
+      <!--New to by the book-->
+      <div class="col-xs-5 col-xs-offset-2 new-mobile" >
+        <a href="#">
+          <div class="btn btn-default" style="width: 100%; font-weight: bold; font-family: Arial Narrow, Arial, sans-serif ">
+            New to by the book?
+          </div>
+        </a>
+      </div> <!--/New to by the book-->
 
     </div><!-- /.row -->
 

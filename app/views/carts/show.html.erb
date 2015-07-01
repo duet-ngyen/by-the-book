@@ -1,25 +1,54 @@
-<div id="mycart" class="small-10 small-centered medium-8 large-8 column">
-  <div class="p1 glassy-bg mb1 text-center radius-l1 radius-r1">
-    <h4>My Cart</h4>
-    <p class="mb0"> You've selected <span class="cart-count"><%=current_user.cart_count%></span> books!</p>
-  </div>
-
-  <% @cart_books.each do |movie|%>
-      <div data-equalizer class="cart-movie large-12 column mb1">
-        <div class="column large-2 text-center p0" data-equalizer-watch>
-          <%=link_to movie do%>
-              <%=image_tag movie.imgbook, class: "radius-l1"%>
-          <%end%>
-        </div>
-        <div class="column large-7 glassy-bg text-center" data-equalizer-watch>
-          <p class="scale ptm"> <%= movie.title %> </p>
-        </div>
-        <div class="column large-3 primary-bg text-center radius-r1" data-equalizer-watch>
-          <%=link_to "" , data: {targetUrl: remove_from_cart_path(movie)} do%>
-              <span class="fi-x">del</span>
-          <%end%>
-          <h4 class="scale">$ <%= movie.price %></h4>
-        </div>
+<% provide(:title, "| YOUR CART") %>
+<div class="body-background">
+  <div class="body-content">
+    <fieldset class="your-cart">
+      <legend><h2 style="font: italic normal bold 32px/1.4em 'times new roman',times,serif; padding: 0; margin: 0; text-align: center">Your Cart</h2></legend>
+      <div class="cart-movie">
+        <p class="selection-cart"> You've selected <span class="cart-count"><%=current_user.cart_count%></span> books!</p>
       </div>
-  <%end%>
+      <div style="border-bottom: solid 1px #ffffff; width: 50%; margin-bottom: 20px"></div>
+
+      <% if @cart_books.count > 0 %>
+          <div id="mycart" class="shop all-items">
+            <% @cart_books.each do |movie|%>
+                <div data-equalizer class="cart-movie">
+                  <div class="col-sm-3" data-equalizer-watch>
+                    <%=link_to movie do%>
+                        <%=image_tag("#{movie.imgbook}", class: "img-thumbnail") %>
+                    <%end%>
+                  </div>
+                  <div class=" col-sm-9 col-xs-12" data-equalizer-watch>
+                    <%= link_to("#{movie.title}", {controller: 'books', action: 'show', :id => movie.id}, {method: 'get'}) %>
+                  </div>
+                  <div class=" col-sm-9 col-xs-12" data-equalizer-watch>
+                    <%=link_to "" , data: {targetUrl: remove_from_cart_path(movie)} do%>
+                        <span class="fi-x"><i class="fa fa-trash-o"></i></span>
+                    <%end%>
+                    <h4 class="book-price">$ <%= movie.price %></h4>
+                  </div>
+                  <div class="modal-book-des col-sm-9 col-xs-12">
+                    <%= simple_format(movie.description.split[0...80].join(' ') + "...") %>
+                  </div>
+                </div>
+                <div style="clear: both; padding-top: 20px"></div>
+            <%end%>
+          </div>
+
+
+          <div class="shop-continue col-sm-6 col-xs-12">
+            <%= link_to("Shop Continue", {controller: 'books', action: 'shop'},
+                        {method: 'get', class: 'btn btn-primary btn-block'}) %>
+          </div>
+
+          <div class="check-out col-sm-6 col-xs-12">
+            <button class="btn btn-primary btn-block">Check Out</button>
+          </div>
+
+      <% end %>
+
+
+    </fieldset>
+    <div style="height: 10px"></div>
+  </div>
 </div>
+

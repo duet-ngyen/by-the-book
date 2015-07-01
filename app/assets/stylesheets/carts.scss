@@ -1,3 +1,30 @@
 // Place all the styles related to the carts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.your-cart {
+  text-align: left !important;
+  font-family: 'Ubuntu';
+}
+
+.all-items {
+  padding: 20px;
+}
+
+.img-book-cart {
+  float: left;
+  margin-right: 20px;
+}
+
+.selection-cart {
+  color: #ffffff;
+  font-size: 1.3em;
+}
+
+.check-out {
+  margin-top: 20px;
+}
+
+.shop-continue {
+  margin-top: 20px;
+}
+
